@@ -95,10 +95,30 @@
             this.timerApp = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.tabScanner = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.outputBoxParser = new System.Windows.Forms.DataGridView();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.outputBoxSemError = new System.Windows.Forms.DataGridView();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.richTextBoxAST = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.outputBox)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusLine.SuspendLayout();
+            this.tabScanner.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.outputBoxParser)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.outputBoxSemError)).BeginInit();
+            this.tabPage4.SuspendLayout();
             this.SuspendLayout();
             // 
             // BottomToolStripPanel
@@ -141,8 +161,6 @@
             // 
             this.outputBox.AllowUserToAddRows = false;
             this.outputBox.AllowUserToDeleteRows = false;
-            this.outputBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.outputBox.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.outputBox.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             this.outputBox.ColumnHeadersHeight = 29;
@@ -151,40 +169,41 @@
             this.Column1,
             this.Column2,
             this.Column3});
-            this.outputBox.Location = new System.Drawing.Point(12, 364);
+            this.outputBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBox.Location = new System.Drawing.Point(3, 3);
             this.outputBox.Name = "outputBox";
             this.outputBox.ReadOnly = true;
             this.outputBox.RowHeadersVisible = false;
             this.outputBox.RowHeadersWidth = 51;
             this.outputBox.RowTemplate.Height = 24;
-            this.outputBox.Size = new System.Drawing.Size(959, 306);
+            this.outputBox.Size = new System.Drawing.Size(945, 293);
             this.outputBox.TabIndex = 1;
             this.outputBox.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBox_CellClick);
             // 
             // column0
             // 
-            this.column0.HeaderText = "Путь к файлу";
+            this.column0.HeaderText = "Условный код";
             this.column0.MinimumWidth = 6;
             this.column0.Name = "column0";
             this.column0.ReadOnly = true;
             // 
             // Column1
             // 
-            this.Column1.HeaderText = "Строка";
+            this.Column1.HeaderText = "Тип лексемы";
             this.Column1.MinimumWidth = 6;
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
             // 
             // Column2
             // 
-            this.Column2.HeaderText = "Столбец";
+            this.Column2.HeaderText = "Лексема";
             this.Column2.MinimumWidth = 6;
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
             // 
             // Column3
             // 
-            this.Column3.HeaderText = "Описание";
+            this.Column3.HeaderText = "Местоположение";
             this.Column3.MinimumWidth = 6;
             this.Column3.Name = "Column3";
             this.Column3.ReadOnly = true;
@@ -411,7 +430,7 @@
             this.сохранениеКакToolStripMenuItem.Enabled = false;
             this.сохранениеКакToolStripMenuItem.Name = "сохранениеКакToolStripMenuItem";
             this.сохранениеКакToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+S";
-            this.сохранениеКакToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift)
+            this.сохранениеКакToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
             this.сохранениеКакToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.сохранениеКакToolStripMenuItem.Text = "Сохранить как";
@@ -546,49 +565,49 @@
             this.постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
             this.постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
-            this.постановкаЗадачиToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.постановкаЗадачиToolStripMenuItem.Click += new System.EventHandler(this.постановкаЗадачиToolStripMenuItem_Click);
             // 
             // грамматикаЯзыкаToolStripMenuItem
             // 
             this.грамматикаЯзыкаToolStripMenuItem.Name = "грамматикаЯзыкаToolStripMenuItem";
             this.грамматикаЯзыкаToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.грамматикаЯзыкаToolStripMenuItem.Text = "Грамматика";
-            this.грамматикаЯзыкаToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.грамматикаЯзыкаToolStripMenuItem.Click += new System.EventHandler(this.грамматикаЯзыкаToolStripMenuItem_Click);
             // 
             // классификацияГрамматикиToolStripMenuItem
             // 
             this.классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
             this.классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
-            this.классификацияГрамматикиToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.классификацияГрамматикиToolStripMenuItem.Click += new System.EventHandler(this.классификацияГрамматикиToolStripMenuItem_Click);
             // 
             // методАнализаToolStripMenuItem
             // 
             this.методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
             this.методАнализаToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.методАнализаToolStripMenuItem.Text = "Метод анализа";
-            this.методАнализаToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.методАнализаToolStripMenuItem.Click += new System.EventHandler(this.методАнализаToolStripMenuItem_Click);
             // 
             // тестовыйПримерToolStripMenuItem
             // 
             this.тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
             this.тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
-            this.тестовыйПримерToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.тестовыйПримерToolStripMenuItem.Click += new System.EventHandler(this.тестовыйПримерToolStripMenuItem_Click);
             // 
             // списокЛитературыToolStripMenuItem
             // 
             this.списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
             this.списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.списокЛитературыToolStripMenuItem.Text = "Список литературы";
-            this.списокЛитературыToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.списокЛитературыToolStripMenuItem.Click += new System.EventHandler(this.списокЛитературыToolStripMenuItem_Click);
             // 
             // исходныйКодПрограммыToolStripMenuItem
             // 
             this.исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
             this.исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
-            this.исходныйКодПрограммыToolStripMenuItem.Click += new System.EventHandler(this.textWork_Click);
+            this.исходныйКодПрограммыToolStripMenuItem.Click += new System.EventHandler(this.исходныйКодПрограммыToolStripMenuItem_Click);
             // 
             // пускToolStripMenuItem
             // 
@@ -685,15 +704,15 @@
             // files
             // 
             this.files.AllowDrop = true;
-            this.files.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.files.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.files.Cursor = System.Windows.Forms.Cursors.Default;
             this.files.ItemSize = new System.Drawing.Size(65, 30);
             this.files.Location = new System.Drawing.Point(12, 73);
             this.files.Name = "files";
             this.files.SelectedIndex = 0;
-            this.files.Size = new System.Drawing.Size(959, 263);
+            this.files.Size = new System.Drawing.Size(959, 256);
             this.files.TabIndex = 4;
             this.files.SelectedIndexChanged += new System.EventHandler(this.files_SelectedIndexChanged);
             this.files.DragDrop += new System.Windows.Forms.DragEventHandler(this.FormGUI_DragDrop);
@@ -741,16 +760,160 @@
             this.saveFileDialog1.DefaultExt = "txt";
             this.saveFileDialog1.Filter = "\"Text files(*.txt)|*.txt|All files(*.*)|*.*\"";
             // 
+            // tabScanner
+            // 
+            this.tabScanner.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabScanner.Controls.Add(this.tabPage1);
+            this.tabScanner.Controls.Add(this.tabPage3);
+            this.tabScanner.Controls.Add(this.tabPage2);
+            this.tabScanner.Controls.Add(this.tabPage4);
+            this.tabScanner.Location = new System.Drawing.Point(12, 342);
+            this.tabScanner.Name = "tabScanner";
+            this.tabScanner.SelectedIndex = 0;
+            this.tabScanner.Size = new System.Drawing.Size(959, 328);
+            this.tabScanner.TabIndex = 5;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.outputBox);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(951, 299);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Лексический анализатор";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.outputBoxParser);
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(951, 302);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Синтаксический анализатор";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // outputBoxParser
+            // 
+            this.outputBoxParser.AllowUserToAddRows = false;
+            this.outputBoxParser.AllowUserToDeleteRows = false;
+            this.outputBoxParser.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.outputBoxParser.ColumnHeadersHeight = 29;
+            this.outputBoxParser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column4,
+            this.Column5,
+            this.Column6});
+            this.outputBoxParser.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBoxParser.Location = new System.Drawing.Point(3, 3);
+            this.outputBoxParser.Name = "outputBoxParser";
+            this.outputBoxParser.ReadOnly = true;
+            this.outputBoxParser.RowHeadersVisible = false;
+            this.outputBoxParser.RowHeadersWidth = 51;
+            this.outputBoxParser.Size = new System.Drawing.Size(945, 296);
+            this.outputBoxParser.TabIndex = 0;
+            this.outputBoxParser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBoxParser_CellClick);
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Неверный фрагмент ";
+            this.Column4.MinimumWidth = 6;
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Местоположение";
+            this.Column5.MinimumWidth = 6;
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Описание ошибки";
+            this.Column6.MinimumWidth = 6;
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.outputBoxSemError);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(951, 302);
+            this.tabPage2.TabIndex = 3;
+            this.tabPage2.Text = "Семантический анализатор";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // outputBoxSemError
+            // 
+            this.outputBoxSemError.AllowUserToAddRows = false;
+            this.outputBoxSemError.AllowUserToDeleteRows = false;
+            this.outputBoxSemError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.outputBoxSemError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.outputBoxSemError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column7,
+            this.Column8});
+            this.outputBoxSemError.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.outputBoxSemError.Location = new System.Drawing.Point(3, 3);
+            this.outputBoxSemError.Name = "outputBoxSemError";
+            this.outputBoxSemError.ReadOnly = true;
+            this.outputBoxSemError.RowHeadersVisible = false;
+            this.outputBoxSemError.RowHeadersWidth = 51;
+            this.outputBoxSemError.Size = new System.Drawing.Size(945, 296);
+            this.outputBoxSemError.TabIndex = 0;
+            this.outputBoxSemError.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBoxSemError_CellClick);
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Сообщение";
+            this.Column7.MinimumWidth = 6;
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Позиция";
+            this.Column8.MinimumWidth = 6;
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.richTextBoxAST);
+            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage4.Size = new System.Drawing.Size(951, 299);
+            this.tabPage4.TabIndex = 4;
+            this.tabPage4.Text = "AST";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxAST
+            // 
+            this.richTextBoxAST.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.richTextBoxAST.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBoxAST.Location = new System.Drawing.Point(3, 3);
+            this.richTextBoxAST.Name = "richTextBoxAST";
+            this.richTextBoxAST.ReadOnly = true;
+            this.richTextBoxAST.Size = new System.Drawing.Size(945, 293);
+            this.richTextBoxAST.TabIndex = 0;
+            this.richTextBoxAST.Text = "";
+            // 
             // FormGUI
             // 
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(983, 695);
+            this.Controls.Add(this.tabScanner);
             this.Controls.Add(this.files);
-            this.Controls.Add(this.outputBox);
             this.Controls.Add(this.statusLine);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormGUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -765,6 +928,13 @@
             this.menuStrip1.PerformLayout();
             this.statusLine.ResumeLayout(false);
             this.statusLine.PerformLayout();
+            this.tabScanner.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.outputBoxParser)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.outputBoxSemError)).EndInit();
+            this.tabPage4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -812,10 +982,6 @@
         private System.Windows.Forms.ToolStripMenuItem текстToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton buttonHelp;
         private System.Windows.Forms.ToolStripButton buttonAboutProgram;
-        private System.Windows.Forms.DataGridViewTextBoxColumn column0;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.ToolStripMenuItem пускToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem локалиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem размерТекстаToolStripMenuItem;
@@ -837,6 +1003,23 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.ToolStripMenuItem русскийToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem китайскийToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn column0;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.TabControl tabScanner;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.DataGridView outputBoxParser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView outputBoxSemError;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.RichTextBox richTextBoxAST;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
     }
 }
 

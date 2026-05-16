@@ -69,11 +69,11 @@ namespace Scanner
                         {
                             buffer += liter;
                         }
-                        addToken(10, "Вещественное число", buffer);
+                        addToken(11, "Вещественное число", buffer);
                     }
                     else
                     {
-                        addToken(9, "Целое без знака", buffer);
+                        addToken(10, "Целое без знака", buffer);
                     }
                     buffer = "";
                 }
@@ -91,74 +91,55 @@ namespace Scanner
                             break;
                         case '=':
                             buffer += liter;
-                            while ((liter = getChar()) == '=')
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(4, "Оператор присваивания", buffer);
                             buffer = "";
                             break;
                         case ' ':
                             buffer += liter;
-                            while ((liter = getChar()) == ' ')
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(5, "Разделитель", buffer);
                             buffer = "";
                             break;
                         case '(':
                             buffer += liter;
-                            while ((liter = getChar()) == '(')
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(6, "Оператор конструктора", buffer);
                             buffer = "";
                             break;
                         case ')':
                             buffer += liter;
-                            while ((liter = getChar()) == ')')
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(7, "Оператор конструктора", buffer);
                             buffer = "";
                             break;
                         case '-':
                             buffer += liter;
-                            while ((liter = getChar()) == '-')
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(8, "Знак минуса", buffer);
+                            buffer = "";
+                            break;
+                        case '+':
+                            buffer += liter;
+                            getNext();
+                            addToken(9, "Знак плюса", buffer);
                             buffer = "";
                             break;
                         case ',':
                             buffer += liter;
-                            while ((liter = getChar()) == ',')
-                            {
-                                buffer += liter;
-                            }
-                            addToken(11, "Оператор перечисления", buffer);
+                            getNext();
+                            addToken(12, "Оператор перечисления", buffer);
                             buffer = "";
                             break;
                         case ';':
                             buffer += liter;
-                            while ((liter = getChar()) == ';')
-                            {
-                                buffer += liter;
-                            }
-                            addToken(12, "Оператор заврешения", buffer);
+                            getNext();
+                            addToken(13, "Оператор заверешения", buffer);
                             buffer = "";
                             break;
                         default:
                             buffer += liter;
-                            while (!(char.IsLetterOrDigit(liter = getChar()) || liter == '\0' || liter == '\n' || liter == ' '
-                                || liter == '(' || liter == ')' || liter == '=' || liter == '-' || liter == ',' || liter == ';'))
-                            {
-                                buffer += liter;
-                            }
+                            getNext();
                             addToken(-1, "Недопустимый символ", buffer);
                             buffer = "";
                             break;
