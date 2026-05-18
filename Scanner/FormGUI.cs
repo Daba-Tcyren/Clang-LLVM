@@ -24,6 +24,9 @@ namespace Scanner
         public FormGUI()
         {
             InitializeComponent();
+
+            outputBoxSemError.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            files.TabPages.Add(NewFile("Новый документ" + (files.TabCount + 1).ToString()));
         }
 
         // Меню - Файл

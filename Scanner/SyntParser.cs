@@ -363,10 +363,15 @@ namespace Scanner
         //  4) <NEW> -> 'new' <TYPE>
         private bool NEW()
         {
-            if (currentToken.id == 2)
+            if (currentToken.id == 2 )
             {
                 GetNextToken();
                 return TYPE();
+            }
+            else if (currentToken.id == 14)
+            {
+                GetNextToken();
+                return END();
             }
 
             AddError(currentToken, "ключевое слово 'new'");
@@ -565,6 +570,11 @@ namespace Scanner
             // Число без знака
             if (currentToken.id == 10 || currentToken.id == 11)
             {
+                return REAL();
+            }
+            else if (currentToken.id == 14)
+            {
+                GetNextToken();
                 return REAL();
             }
 
@@ -858,6 +868,11 @@ namespace Scanner
             // Число без знака
             if (currentToken.id == 10 || currentToken.id == 11)
             {
+                return IMAG();
+            }
+            else if(currentToken.id == 14)
+            {
+                GetNextToken();
                 return IMAG();
             }
 

@@ -12,31 +12,30 @@ namespace Scanner
     {
         public string name { get; set; }
         public string type { get; set; }
-        public int Line { get; set; }
-        public int Column { get; set; }
     }
-    internal class VariableDeclNode : AstNode
+    internal class ComplexDeclarationNode : AstNode
     {
-        public VariableValueNode realPart { get; set; }
-        public VariableValueNode imagPart { get; set; }
+        public DoubleLiteralNode realPart { get; set; }
+        public DoubleLiteralNode imagPart { get; set; }
         public List<string> Print()
         {
             List<string> tree = new List<string>();
             tree.Add("ComplexDeclarationNode");
             tree.Add("├── name: " + name);
             tree.Add("├── type: " + type);
-            tree.Add("└── initializer: ");
+            tree.Add("└── valueRealPart: DoubleLiteralNode");
             tree.Add("        " + realPart.Print());
+            tree.Add("└── valueImagePart: DoubleLiteralNode");
             tree.Add("        " + imagPart.Print());
             return tree;
         }
     }
-    internal class VariableValueNode : AstNode
+    internal class DoubleLiteralNode : AstNode
     {
         public double Value { get; set; }
         public string Print()
         {
-            return $"└──{name}: {Value}";
+            return $"└──Value: {Value}";
         }
     } 
     class SymbolTable

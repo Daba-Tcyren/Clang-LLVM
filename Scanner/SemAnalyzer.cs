@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Scanner
         public List<SemError> errors = new List<SemError>();
         private Token Name;
         private SymbolTable symbolTable = new SymbolTable();
-        private VariableDeclNode variableDeclNode = new VariableDeclNode();
+        private ComplexDeclarationNode сomplexDeclarationNode = new ComplexDeclarationNode();
         public List<List<string>> Analyze(List<Token> tokens)
         {
             List<List<string>> tree = new List<List<string>>();
@@ -36,10 +37,13 @@ namespace Scanner
             string valueImage = "";
             double image = 0.0;
             int i = 0;
-            int k_id = 0;
+            int k_id = 0; 
             int k_type = 0;
             int k_valueReal = 0;
             int k_valueImage = 0;
+            int k_stringVar = -1;
+            int k_stringValueReal = -1;
+            int k_stringValueImage = -1;
 
             foreach (Token token in tokens)
             {
@@ -56,6 +60,33 @@ namespace Scanner
                     k_type++;
                     continue;
                 }
+                if(token.id == 4)
+                {
+                    k_stringVar++;
+                    continue;
+                }
+                if (token.id == 14 && k_stringVar == i && k_valueReal == i && k_valueImage == i)
+                {
+                    AddError(token, $"Ошибка: инициализирующее значение строка - {token.name} не соотвествует объявленному типу Complex.");
+                    k_valueReal++;
+                    k_valueImage++;
+                    k_stringValueReal++;
+                    k_stringValueImage++;
+                    i++;
+                    continue;
+                }
+                if (token.id == 6 )
+                {
+                    k_stringVar--;
+                    k_stringValueReal++;
+                    continue;
+                }
+                if (token.id == 14 && k_stringValueReal == i && k_valueReal == i && k_valueImage == i)
+                {
+                    AddError(token, $"Ошибка: инициализирующее значение строка - {token.name} не соотвествует типу Double.");
+                    k_valueReal++;
+                    continue;
+                }
                 if ((token.id == 8 || token.id == 9) && k_valueReal == i)
                 {
                     valueReal = token.name;
@@ -66,10 +97,18 @@ namespace Scanner
                     valueReal += token.name.Replace('.', ',');
                     if (!double.TryParse(valueReal, out real)) 
                     {
-                        AddError(token, $"Ошибка: значение \"{valueReal}\" выходит за допустимые пределы");
+                        AddError(token, $"Ошибка: значение \"{valueReal.Substring(0, 5)}...\" выходит за допустимые пределы.\nОжидалось значение от отрицательного 1,79769313486232e308 до положительного 1,79769313486232e308");
                         valueReal = "";
                     }
                     k_valueReal++;
+                    continue;
+                }
+                if (token.id == 14 && k_stringValueReal == i && k_valueReal - 1 == i && k_valueImage == i)
+                {
+                    AddError(token, $"Ошибка: инициализирующее значение строка - {token.name} не соотвествует типу Double.");
+                    k_valueImage++;
+                    k_stringVar++;
+                    i++;
                     continue;
                 }
                 if ((token.id == 8 || token.id == 9) && k_valueImage == i )
@@ -82,7 +121,7 @@ namespace Scanner
                     valueImage += token.name.Replace('.', ',');
                     if (!double.TryParse(valueImage, out image))
                     {
-                        AddError(token, $"Ошибка: значение \"{valueImage}\" выходит за допустимые пределы");
+                        AddError(token, $"Ошибка: значение \"{valueImage.Substring(0,5)}...\" выходит за допустимые пределы.\nОжидалось значение от отрицательного 1,79769313486232e308 до положительного 1,79769313486232e308");
                         valueImage = "";
                     }
 
@@ -104,24 +143,25 @@ namespace Scanner
                     }
                     valueReal = "";
                     valueImage = "";
+                    k_stringVar = i;
                     i++;
                 }
             }
             for (i = 0; i < symbolTable.Length(); i++)
             {
-                variableDeclNode.type = symbolTable.getType(i);
-                variableDeclNode.name = symbolTable.getName(i);
-                VariableValueNode tempReal = new VariableValueNode();
+                сomplexDeclarationNode.type = symbolTable.getType(i);
+                сomplexDeclarationNode.name = symbolTable.getName(i);
+                DoubleLiteralNode tempReal = new DoubleLiteralNode();
                 tempReal.name = "RealPart";
                 tempReal.type = "double";
                 tempReal.Value = symbolTable.getRealPart(i);
-                variableDeclNode.realPart = tempReal;
-                VariableValueNode tempImage = new VariableValueNode();
+                сomplexDeclarationNode.realPart = tempReal;
+                DoubleLiteralNode tempImage = new DoubleLiteralNode();
                 tempImage.name = "ImagePart";
                 tempImage.type = "double";
                 tempImage.Value = symbolTable.getImagePart(i);
-                variableDeclNode.imagPart = tempImage;
-                tree.Add(variableDeclNode.Print());
+                сomplexDeclarationNode.imagPart = tempImage;
+                tree.Add(сomplexDeclarationNode.Print());
             }
             return tree;
         }

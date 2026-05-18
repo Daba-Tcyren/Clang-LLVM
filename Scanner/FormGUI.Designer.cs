@@ -840,10 +840,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.outputBoxSemError);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(951, 302);
+            this.tabPage2.Size = new System.Drawing.Size(951, 299);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Семантический анализатор";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -852,7 +852,10 @@
             // 
             this.outputBoxSemError.AllowUserToAddRows = false;
             this.outputBoxSemError.AllowUserToDeleteRows = false;
+            this.outputBoxSemError.AllowUserToOrderColumns = true;
             this.outputBoxSemError.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.outputBoxSemError.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.outputBoxSemError.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableAlwaysIncludeHeaderText;
             this.outputBoxSemError.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.outputBoxSemError.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column7,
@@ -863,7 +866,7 @@
             this.outputBoxSemError.ReadOnly = true;
             this.outputBoxSemError.RowHeadersVisible = false;
             this.outputBoxSemError.RowHeadersWidth = 51;
-            this.outputBoxSemError.Size = new System.Drawing.Size(945, 296);
+            this.outputBoxSemError.Size = new System.Drawing.Size(945, 293);
             this.outputBoxSemError.TabIndex = 0;
             this.outputBoxSemError.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBoxSemError_CellClick);
             // 

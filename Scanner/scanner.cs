@@ -137,6 +137,17 @@ namespace Scanner
                             addToken(13, "Оператор заверешения", buffer);
                             buffer = "";
                             break;
+                        case '"':
+                            buffer += liter;
+                            while ((liter = getChar())!='"' && liter != '\0' && currentPosition < text.Length)
+                            {
+                                buffer += liter;
+                            }
+                            buffer += liter;
+                            getNext();
+                            addToken(14, "Строка", buffer);
+                            buffer = "";
+                            break;
                         default:
                             buffer += liter;
                             getNext();
