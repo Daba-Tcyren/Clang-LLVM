@@ -176,7 +176,7 @@
             this.outputBox.RowHeadersVisible = false;
             this.outputBox.RowHeadersWidth = 51;
             this.outputBox.RowTemplate.Height = 24;
-            this.outputBox.Size = new System.Drawing.Size(945, 293);
+            this.outputBox.Size = new System.Drawing.Size(945, 289);
             this.outputBox.TabIndex = 1;
             this.outputBox.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBox_CellClick);
             // 
@@ -226,7 +226,7 @@
             this.buttonHelp,
             this.buttonAboutProgram});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.Size = new System.Drawing.Size(983, 37);
@@ -374,7 +374,7 @@
             this.размерТекстаToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(983, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(983, 28);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -389,7 +389,7 @@
             this.toolStripSeparator4,
             this.выходToolStripMenuItem});
             this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
-            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.файлToolStripMenuItem.Text = "Файл";
             // 
             // созданиеToolStripMenuItem
@@ -397,7 +397,7 @@
             this.созданиеToolStripMenuItem.Name = "созданиеToolStripMenuItem";
             this.созданиеToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+N";
             this.созданиеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.созданиеToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.созданиеToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.созданиеToolStripMenuItem.Text = "Создать";
             this.созданиеToolStripMenuItem.Click += new System.EventHandler(this.CreatFile_Click);
             // 
@@ -406,14 +406,14 @@
             this.открытиеToolStripMenuItem.Name = "открытиеToolStripMenuItem";
             this.открытиеToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+O";
             this.открытиеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.открытиеToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.открытиеToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.открытиеToolStripMenuItem.Text = "Открыть";
             this.открытиеToolStripMenuItem.Click += new System.EventHandler(this.OpenFile_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(279, 6);
             // 
             // сохранениеToolStripMenuItem
             // 
@@ -421,7 +421,7 @@
             this.сохранениеToolStripMenuItem.Name = "сохранениеToolStripMenuItem";
             this.сохранениеToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+S";
             this.сохранениеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.сохранениеToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.сохранениеToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.сохранениеToolStripMenuItem.Text = "Сохранить";
             this.сохранениеToolStripMenuItem.Click += new System.EventHandler(this.SaveFile_Click);
             // 
@@ -432,21 +432,21 @@
             this.сохранениеКакToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+Shift+S";
             this.сохранениеКакToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.сохранениеКакToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.сохранениеКакToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.сохранениеКакToolStripMenuItem.Text = "Сохранить как";
             this.сохранениеКакToolStripMenuItem.Click += new System.EventHandler(this.SaveAsFile_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(222, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(279, 6);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
             this.выходToolStripMenuItem.ShortcutKeyDisplayString = "Alt+F4";
             this.выходToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(282, 26);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -463,7 +463,7 @@
             this.toolStripSeparator2,
             this.выделениеВсегоТекстаToolStripMenuItem});
             this.правкаToolStripMenuItem.Name = "правкаToolStripMenuItem";
-            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.правкаToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.правкаToolStripMenuItem.Text = "Правка";
             // 
             // MenuItemCancel
@@ -472,7 +472,7 @@
             this.MenuItemCancel.Name = "MenuItemCancel";
             this.MenuItemCancel.ShortcutKeyDisplayString = "Ctrl+Z";
             this.MenuItemCancel.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Z)));
-            this.MenuItemCancel.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemCancel.Size = new System.Drawing.Size(238, 26);
             this.MenuItemCancel.Text = "Отмена";
             this.MenuItemCancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
@@ -482,14 +482,14 @@
             this.MenuItemReturn.Name = "MenuItemReturn";
             this.MenuItemReturn.ShortcutKeyDisplayString = "Ctrl+Y";
             this.MenuItemReturn.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Y)));
-            this.MenuItemReturn.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemReturn.Size = new System.Drawing.Size(238, 26);
             this.MenuItemReturn.Text = "Возрат";
             this.MenuItemReturn.Click += new System.EventHandler(this.Return_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(235, 6);
             // 
             // MenuItemCut
             // 
@@ -497,7 +497,7 @@
             this.MenuItemCut.Name = "MenuItemCut";
             this.MenuItemCut.ShortcutKeyDisplayString = "Ctrl+X";
             this.MenuItemCut.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
-            this.MenuItemCut.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemCut.Size = new System.Drawing.Size(238, 26);
             this.MenuItemCut.Text = "Вырезать";
             this.MenuItemCut.Click += new System.EventHandler(this.Cut_Click);
             // 
@@ -507,7 +507,7 @@
             this.MenuItemCopy.Name = "MenuItemCopy";
             this.MenuItemCopy.ShortcutKeyDisplayString = "Ctrl+C";
             this.MenuItemCopy.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.MenuItemCopy.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemCopy.Size = new System.Drawing.Size(238, 26);
             this.MenuItemCopy.Text = "Копировать";
             this.MenuItemCopy.Click += new System.EventHandler(this.Copy_Click);
             // 
@@ -517,7 +517,7 @@
             this.MenuItemPaste.Name = "MenuItemPaste";
             this.MenuItemPaste.ShortcutKeyDisplayString = "Ctrl+V";
             this.MenuItemPaste.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.V)));
-            this.MenuItemPaste.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemPaste.Size = new System.Drawing.Size(238, 26);
             this.MenuItemPaste.Text = "Вставить";
             this.MenuItemPaste.Click += new System.EventHandler(this.Paste_Click);
             // 
@@ -527,14 +527,14 @@
             this.MenuItemDelete.Name = "MenuItemDelete";
             this.MenuItemDelete.ShortcutKeyDisplayString = "Delete";
             this.MenuItemDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.MenuItemDelete.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemDelete.Size = new System.Drawing.Size(238, 26);
             this.MenuItemDelete.Text = "Удалить";
             this.MenuItemDelete.Click += new System.EventHandler(this.Delete_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(235, 6);
             // 
             // выделениеВсегоТекстаToolStripMenuItem
             // 
@@ -542,7 +542,7 @@
             this.выделениеВсегоТекстаToolStripMenuItem.Name = "выделениеВсегоТекстаToolStripMenuItem";
             this.выделениеВсегоТекстаToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+A";
             this.выделениеВсегоТекстаToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.выделениеВсегоТекстаToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.выделениеВсегоТекстаToolStripMenuItem.Size = new System.Drawing.Size(238, 26);
             this.выделениеВсегоТекстаToolStripMenuItem.Text = "Выделить все";
             this.выделениеВсегоТекстаToolStripMenuItem.Click += new System.EventHandler(this.SelectAll_Click);
             // 
@@ -557,55 +557,55 @@
             this.списокЛитературыToolStripMenuItem,
             this.исходныйКодПрограммыToolStripMenuItem});
             this.текстToolStripMenuItem.Name = "текстToolStripMenuItem";
-            this.текстToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.текстToolStripMenuItem.Size = new System.Drawing.Size(59, 24);
             this.текстToolStripMenuItem.Text = "Текст";
             // 
             // постановкаЗадачиToolStripMenuItem
             // 
             this.постановкаЗадачиToolStripMenuItem.Name = "постановкаЗадачиToolStripMenuItem";
-            this.постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.постановкаЗадачиToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.постановкаЗадачиToolStripMenuItem.Text = "Постановка задачи";
             this.постановкаЗадачиToolStripMenuItem.Click += new System.EventHandler(this.постановкаЗадачиToolStripMenuItem_Click);
             // 
             // грамматикаЯзыкаToolStripMenuItem
             // 
             this.грамматикаЯзыкаToolStripMenuItem.Name = "грамматикаЯзыкаToolStripMenuItem";
-            this.грамматикаЯзыкаToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.грамматикаЯзыкаToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.грамматикаЯзыкаToolStripMenuItem.Text = "Грамматика";
             this.грамматикаЯзыкаToolStripMenuItem.Click += new System.EventHandler(this.грамматикаЯзыкаToolStripMenuItem_Click);
             // 
             // классификацияГрамматикиToolStripMenuItem
             // 
             this.классификацияГрамматикиToolStripMenuItem.Name = "классификацияГрамматикиToolStripMenuItem";
-            this.классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.классификацияГрамматикиToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.классификацияГрамматикиToolStripMenuItem.Text = "Классификация грамматики";
             this.классификацияГрамматикиToolStripMenuItem.Click += new System.EventHandler(this.классификацияГрамматикиToolStripMenuItem_Click);
             // 
             // методАнализаToolStripMenuItem
             // 
             this.методАнализаToolStripMenuItem.Name = "методАнализаToolStripMenuItem";
-            this.методАнализаToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.методАнализаToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.методАнализаToolStripMenuItem.Text = "Метод анализа";
             this.методАнализаToolStripMenuItem.Click += new System.EventHandler(this.методАнализаToolStripMenuItem_Click);
             // 
             // тестовыйПримерToolStripMenuItem
             // 
             this.тестовыйПримерToolStripMenuItem.Name = "тестовыйПримерToolStripMenuItem";
-            this.тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.тестовыйПримерToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.тестовыйПримерToolStripMenuItem.Text = "Тестовый пример";
             this.тестовыйПримерToolStripMenuItem.Click += new System.EventHandler(this.тестовыйПримерToolStripMenuItem_Click);
             // 
             // списокЛитературыToolStripMenuItem
             // 
             this.списокЛитературыToolStripMenuItem.Name = "списокЛитературыToolStripMenuItem";
-            this.списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.списокЛитературыToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.списокЛитературыToolStripMenuItem.Text = "Список литературы";
             this.списокЛитературыToolStripMenuItem.Click += new System.EventHandler(this.списокЛитературыToolStripMenuItem_Click);
             // 
             // исходныйКодПрограммыToolStripMenuItem
             // 
             this.исходныйКодПрограммыToolStripMenuItem.Name = "исходныйКодПрограммыToolStripMenuItem";
-            this.исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.исходныйКодПрограммыToolStripMenuItem.Size = new System.Drawing.Size(288, 26);
             this.исходныйКодПрограммыToolStripMenuItem.Text = "Исходный код программы";
             this.исходныйКодПрограммыToolStripMenuItem.Click += new System.EventHandler(this.исходныйКодПрограммыToolStripMenuItem_Click);
             // 
@@ -617,7 +617,7 @@
             this.пускToolStripMenuItem.Name = "пускToolStripMenuItem";
             this.пускToolStripMenuItem.ShortcutKeyDisplayString = "F5";
             this.пускToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.пускToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.пускToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.пускToolStripMenuItem.Text = "Пуск";
             this.пускToolStripMenuItem.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             this.пускToolStripMenuItem.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
@@ -630,7 +630,7 @@
             this.вызовСправкиToolStripMenuItem,
             this.оПрограммеToolStripMenuItem});
             this.справкаToolStripMenuItem.Name = "справкаToolStripMenuItem";
-            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.справкаToolStripMenuItem.Size = new System.Drawing.Size(81, 24);
             this.справкаToolStripMenuItem.Text = "Справка";
             // 
             // вызовСправкиToolStripMenuItem
@@ -638,7 +638,7 @@
             this.вызовСправкиToolStripMenuItem.Name = "вызовСправкиToolStripMenuItem";
             this.вызовСправкиToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F1";
             this.вызовСправкиToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
-            this.вызовСправкиToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.вызовСправкиToolStripMenuItem.Size = new System.Drawing.Size(254, 26);
             this.вызовСправкиToolStripMenuItem.Text = "Вызов справки";
             this.вызовСправкиToolStripMenuItem.Click += new System.EventHandler(this.Help_Click);
             // 
@@ -647,7 +647,7 @@
             this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
             this.оПрограммеToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+F2";
             this.оПрограммеToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F2)));
-            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(254, 26);
             this.оПрограммеToolStripMenuItem.Text = "О программе";
             this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.AboutProgram_Click);
             // 
@@ -657,20 +657,20 @@
             this.русскийToolStripMenuItem,
             this.китайскийToolStripMenuItem});
             this.локалиToolStripMenuItem.Name = "локалиToolStripMenuItem";
-            this.локалиToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.локалиToolStripMenuItem.Size = new System.Drawing.Size(115, 24);
             this.локалиToolStripMenuItem.Text = "Локализация";
             // 
             // русскийToolStripMenuItem
             // 
             this.русскийToolStripMenuItem.Name = "русскийToolStripMenuItem";
-            this.русскийToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.русскийToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.русскийToolStripMenuItem.Text = "Русский";
             this.русскийToolStripMenuItem.Click += new System.EventHandler(this.RusLg_Click);
             // 
             // китайскийToolStripMenuItem
             // 
             this.китайскийToolStripMenuItem.Name = "китайскийToolStripMenuItem";
-            this.китайскийToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.китайскийToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.китайскийToolStripMenuItem.Text = "Китайский";
             this.китайскийToolStripMenuItem.Click += new System.EventHandler(this.ChinaLg);
             // 
@@ -680,7 +680,7 @@
             this.увеличитьToolStripMenuItem,
             this.уменьшитьToolStripMenuItem});
             this.размерТекстаToolStripMenuItem.Name = "размерТекстаToolStripMenuItem";
-            this.размерТекстаToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.размерТекстаToolStripMenuItem.Size = new System.Drawing.Size(120, 24);
             this.размерТекстаToolStripMenuItem.Text = "Размер текста";
             // 
             // увеличитьToolStripMenuItem
@@ -688,7 +688,7 @@
             this.увеличитьToolStripMenuItem.Name = "увеличитьToolStripMenuItem";
             this.увеличитьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+ +";
             this.увеличитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Oemplus)));
-            this.увеличитьToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.увеличитьToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.увеличитьToolStripMenuItem.Text = "Увеличить";
             this.увеличитьToolStripMenuItem.Click += new System.EventHandler(this.fontSize_Up);
             // 
@@ -697,7 +697,7 @@
             this.уменьшитьToolStripMenuItem.Name = "уменьшитьToolStripMenuItem";
             this.уменьшитьToolStripMenuItem.ShortcutKeyDisplayString = "Ctrl+ –";
             this.уменьшитьToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.OemMinus)));
-            this.уменьшитьToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.уменьшитьToolStripMenuItem.Size = new System.Drawing.Size(226, 26);
             this.уменьшитьToolStripMenuItem.Text = "Уменьшить";
             this.уменьшитьToolStripMenuItem.Click += new System.EventHandler(this.fontSize_Down);
             // 
@@ -712,7 +712,7 @@
             this.files.Location = new System.Drawing.Point(12, 73);
             this.files.Name = "files";
             this.files.SelectedIndex = 0;
-            this.files.Size = new System.Drawing.Size(959, 256);
+            this.files.Size = new System.Drawing.Size(959, 102);
             this.files.TabIndex = 4;
             this.files.SelectedIndexChanged += new System.EventHandler(this.files_SelectedIndexChanged);
             this.files.DragDrop += new System.Windows.Forms.DragEventHandler(this.FormGUI_DragDrop);
@@ -724,22 +724,22 @@
             this.statusLine.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.statusFont,
             this.statusTimeApp});
-            this.statusLine.Location = new System.Drawing.Point(0, 673);
+            this.statusLine.Location = new System.Drawing.Point(0, 797);
             this.statusLine.Name = "statusLine";
-            this.statusLine.Size = new System.Drawing.Size(983, 22);
+            this.statusLine.Size = new System.Drawing.Size(983, 26);
             this.statusLine.TabIndex = 2;
             this.statusLine.Text = "statusStrip1";
             // 
             // statusFont
             // 
             this.statusFont.Name = "statusFont";
-            this.statusFont.Size = new System.Drawing.Size(118, 17);
+            this.statusFont.Size = new System.Drawing.Size(150, 20);
             this.statusFont.Text = "Шрифт: Segoe UI 9pt";
             // 
             // statusTimeApp
             // 
             this.statusTimeApp.Name = "statusTimeApp";
-            this.statusTimeApp.Size = new System.Drawing.Size(195, 17);
+            this.statusTimeApp.Size = new System.Drawing.Size(247, 20);
             this.statusTimeApp.Text = "Время работы приложения: 0 cек.";
             // 
             // timerApp
@@ -768,19 +768,19 @@
             this.tabScanner.Controls.Add(this.tabPage3);
             this.tabScanner.Controls.Add(this.tabPage2);
             this.tabScanner.Controls.Add(this.tabPage4);
-            this.tabScanner.Location = new System.Drawing.Point(12, 342);
+            this.tabScanner.Location = new System.Drawing.Point(12, 197);
             this.tabScanner.Name = "tabScanner";
             this.tabScanner.SelectedIndex = 0;
-            this.tabScanner.Size = new System.Drawing.Size(959, 328);
+            this.tabScanner.Size = new System.Drawing.Size(959, 601);
             this.tabScanner.TabIndex = 5;
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.outputBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(951, 299);
+            this.tabPage1.Size = new System.Drawing.Size(951, 295);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Лексический анализатор";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -788,10 +788,10 @@
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.outputBoxParser);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(951, 302);
+            this.tabPage3.Size = new System.Drawing.Size(951, 295);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Синтаксический анализатор";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -812,7 +812,7 @@
             this.outputBoxParser.ReadOnly = true;
             this.outputBoxParser.RowHeadersVisible = false;
             this.outputBoxParser.RowHeadersWidth = 51;
-            this.outputBoxParser.Size = new System.Drawing.Size(945, 296);
+            this.outputBoxParser.Size = new System.Drawing.Size(945, 289);
             this.outputBoxParser.TabIndex = 0;
             this.outputBoxParser.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBoxParser_CellClick);
             // 
@@ -840,10 +840,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.outputBoxSemError);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(951, 299);
+            this.tabPage2.Size = new System.Drawing.Size(951, 295);
             this.tabPage2.TabIndex = 3;
             this.tabPage2.Text = "Семантический анализатор";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -866,7 +866,7 @@
             this.outputBoxSemError.ReadOnly = true;
             this.outputBoxSemError.RowHeadersVisible = false;
             this.outputBoxSemError.RowHeadersWidth = 51;
-            this.outputBoxSemError.Size = new System.Drawing.Size(945, 293);
+            this.outputBoxSemError.Size = new System.Drawing.Size(945, 289);
             this.outputBoxSemError.TabIndex = 0;
             this.outputBoxSemError.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.outputBoxSemError_CellClick);
             // 
@@ -887,12 +887,12 @@
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.richTextBoxAST);
-            this.tabPage4.Location = new System.Drawing.Point(4, 25);
+            this.tabPage4.Location = new System.Drawing.Point(4, 29);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(951, 299);
+            this.tabPage4.Size = new System.Drawing.Size(951, 568);
             this.tabPage4.TabIndex = 4;
-            this.tabPage4.Text = "AST";
+            this.tabPage4.Text = "AST / POLIZ";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // richTextBoxAST
@@ -901,8 +901,7 @@
             this.richTextBoxAST.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBoxAST.Location = new System.Drawing.Point(3, 3);
             this.richTextBoxAST.Name = "richTextBoxAST";
-            this.richTextBoxAST.ReadOnly = true;
-            this.richTextBoxAST.Size = new System.Drawing.Size(945, 293);
+            this.richTextBoxAST.Size = new System.Drawing.Size(945, 562);
             this.richTextBoxAST.TabIndex = 0;
             this.richTextBoxAST.Text = "";
             // 
@@ -910,7 +909,7 @@
             // 
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(983, 695);
+            this.ClientSize = new System.Drawing.Size(983, 823);
             this.Controls.Add(this.tabScanner);
             this.Controls.Add(this.files);
             this.Controls.Add(this.statusLine);

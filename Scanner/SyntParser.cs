@@ -29,7 +29,8 @@ namespace Scanner
         private int declarationCount = 0;
         public List<SyntError> Parse(List<Token> tokens)
         {
-            this.tokens = MergeErrorTokensSimple(tokens);
+            //this.tokens = MergeErrorTokensSimple(tokens);
+            this.tokens = tokens;
             this.errors = new List<SyntError>();
             this.declarationCount = 0;
 
@@ -147,20 +148,20 @@ namespace Scanner
             currentToken = tokens[tempPos];
             AddError(currentToken, "открывающая скобка '('");
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -236,20 +237,20 @@ namespace Scanner
             currentToken = tokens[tempPos];
             AddError(currentToken, "открывающая скобка '('");
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -318,20 +319,20 @@ namespace Scanner
             currentToken = tokens[tempPos];
             AddError(currentToken, "открывающая скобка '('");
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -397,20 +398,20 @@ namespace Scanner
             currentToken = tokens[tempPos];
             AddError(currentToken, "открывающая скобка '('");
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -461,20 +462,20 @@ namespace Scanner
             currentToken = tokens[tempPos];
             AddError(currentToken, "открывающая скобка '('");
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -508,7 +509,21 @@ namespace Scanner
             if (currentToken.id == 6)
             {
                 GetNextToken();
-                return SIGN();
+                E();
+
+                // Проверка на запятую между частями
+                if (currentToken.id == 12)
+                {
+                    GetNextToken();
+                    E();
+
+                    // Проверка на закрывающую скобку
+                    if (currentToken.id == 7)
+                    {
+                        GetNextToken();
+                        return END();
+                    }
+                }
             }
 
             AddError(currentToken, "открывающая скобка '('");
@@ -516,87 +531,20 @@ namespace Scanner
             if (tokens.Count == 5) tempPos = currentPos - 1;
             else tempPos = currentPos;
 
-            if (SkipToNumberOrSign())
-            {
-                return SIGN();
-            }
+            //if (SkipToNumberOrSign())
+            //{
+            //    return SIGN();
+            //}
 
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "знак ('+' или '-') или число");
+            //currentPos = tempPos;
+            //currentToken = tokens[tempPos];
+            //AddError(currentToken, "знак ('+' или '-') или число");
 
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "запятая ','");
-            AddError(currentToken, "знак ('+' или '-') или число");
-
-            if (SkipToToken(7))
-            {
-                GetNextToken();
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-            return false;
-        }
-
-        //  7) <SIGN> -> '+' <DIGIT_REAL> | '-' <DIGIT_REAL> | digit <REAL>
-        private bool SIGN()
-        {
-            // Знак '+' '-'
-            if (currentToken.id == 9 || currentToken.id == 8)
-            {
-                GetNextToken();
-                return DIGIT_REAL();
-            }
-            
-            // Число без знака
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                return REAL();
-            }
-            else if (currentToken.id == 14)
-            {
-                GetNextToken();
-                return REAL();
-            }
-
-            AddError(currentToken, "знак ('+' или '-') или число");
-            int tempPos;
-            if (tokens.Count == 6) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            if (SkipToNumberOrSignOrCommo())
-            {
-                if (currentToken.id == 9 || currentToken.id == 8)
-                {
-                    GetNextToken();
-                    return DIGIT_REAL();
-                }
-                return REAL();
-            }
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
+            //if (SkipToToken(12)) // ','
+            //{
+            //    GetNextToken();
+            //    return IMAG_SIGN();
+            //}
 
             currentPos = tempPos;
             currentToken = tokens[tempPos];
@@ -624,440 +572,6 @@ namespace Scanner
             return false;
         }
 
-        //  8) <DIGIT_REAL> -> digit <REAL>
-        private bool DIGIT_REAL()
-        {
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                return REAL();
-            }
-
-            AddError(currentToken, "число после знака реальной части");
-            int tempPos;
-            if (tokens.Count == 7) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            if (SkipToNumber())
-            {
-                return REAL();
-            }
-
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "запятая ','");
-            AddError(currentToken, "знак ('+' или '-') или число");
-
-            if (SkipToToken(7))
-            {
-                GetNextToken();
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  9) <REAL> -> digit <REAL> | '.' <REAL_DOT> | ',' <IMAG_SIGN>
-        private bool REAL()
-        {
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                // Проверяем, есть ли в числе точка
-                if (currentToken.name.Contains('.'))
-                {
-                    return REAL_DOT();
-                }
-
-                GetNextToken();
-            }
-
-            // Проверка на запятую между частями
-            if (currentToken.id == 12)
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            int tempPos;
-            if (tokens.Count <= 8) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "запятая ','");
-
-            if (SkipToNumberOrSign() && currentPos != tokens.Count - 1)
-            {
-                return IMAG_SIGN();
-            }
-
-            AddError(currentToken, "знак ('+' или '-') или число");
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            if (SkipToToken(7))
-            {
-                GetNextToken();
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  10) <REAL_DOT> -> digit <REAL_FRACTION>
-        private bool REAL_DOT()
-        {
-            string number = currentToken.name;
-            int dotIndex = number.IndexOf('.');
-
-            if (dotIndex >= 0 && dotIndex < number.Length - 1)
-            {
-                GetNextToken();
-                return REAL_FRACTION();
-            }
-
-            AddError(currentToken, "число после точки в реальной части");
-
-            int tempPos;
-            if (tokens.Count <= 8) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            if (SkipToToken(10)) // ','
-            {
-                GetNextToken();
-                return REAL_FRACTION();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            
-            if (SkipToToken(12)) // ','
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "запятая ','");
-
-            if (SkipToNumberOrSign() && currentPos != tokens.Count - 1)
-            {
-                return IMAG_SIGN();
-            }
-
-            AddError(currentToken, "знак ('+' или '-') или число");
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            if (SkipToToken(7))
-            {
-                GetNextToken();
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  11) <REAL_FRACTION> -> digit <REAL_FRACTION> | ',' <IMAG_SIGN>
-        private bool REAL_FRACTION()
-        {
-            if (currentToken.id == 12)
-            {
-                GetNextToken();
-                return IMAG_SIGN();
-            }
-
-            AddError(currentToken, "  ',' между действительной и мнимой частями");
-            int tempPos;
-            if (tokens.Count <= 8) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-            if (SkipToToken(12))
-            {
-                return IMAG_SIGN();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            
-            if (SkipToNumberOrSign() && currentPos != tokens.Count - 1)
-            {
-                return IMAG_SIGN();
-            }
-            AddError(currentToken, "знак ('+' или '-') или число");
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            
-            if (SkipToToken(7)) 
-            {
-                GetNextToken();
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  12) <IMAG_SIGN> -> '+' <DIGIT_IMAG> | '-' <DIGIT_IMAG> | digit <IMAG>
-        private bool IMAG_SIGN()
-        {
-            // Знак '+' '-'
-            if (currentToken.id == 9 || currentToken.id == 8)
-            {
-                GetNextToken();
-                return DIGIT_IMAG();
-            }
-
-            // Число без знака
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                return IMAG();
-            }
-            else if(currentToken.id == 14)
-            {
-                GetNextToken();
-                return IMAG();
-            }
-
-            AddError(currentToken, "знак ('+' или '-') или число для мнимой части");
-
-            int tempPos;
-            if (tokens.Count <= 9) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            if (SkipToNumberOrSign())
-            {
-                if (currentToken.id == 9 || currentToken.id == 8)
-                {
-                    GetNextToken();
-                    return DIGIT_IMAG();
-                }
-                return IMAG();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            if (SkipToToken(7)) // ')'
-            {
-                GetNextToken();
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  13) <DIGIT_IMAG> -> digit <IMAG>
-        private bool DIGIT_IMAG()
-        {
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                return IMAG();
-            }
-
-            AddError(currentToken, "число после знака мнимой части");
-            int tempPos;
-            if (tokens.Count <= 10) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-            if (SkipToNumber())
-            {
-                return IMAG();
-            }
-
-            if (SkipToToken(7)) // ')'
-            {
-                GetNextToken();
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-            return false;
-        }
-
-        //  14) <IMAG> -> digit <IMAG> | '.' <IMAG_DOT> | ')' <END>
-        private bool IMAG()
-        {
-            if (currentToken.id == 10 || currentToken.id == 11)
-            {
-                if (currentToken.name.Contains('.'))
-                {
-                    return IMAG_DOT();
-                }
-                GetNextToken();
-            }
-
-            // Проверка на закрывающую скобку
-            if (currentToken.id == 7)
-            {
-                GetNextToken();
-                return END();
-            }
-
-            int tempPos;
-            if (tokens.Count <= 11) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  15) <IMAG_DOT> -> digit <IMAG_FRACTION>
-        private bool IMAG_DOT()
-        {
-            string number = currentToken.name;
-            int dotIndex = number.IndexOf('.');
-
-            if (dotIndex >= 0 && dotIndex < number.Length - 1)
-            {
-                GetNextToken();
-                return IMAG_FRACTION();
-            }
-
-            AddError(currentToken, "число после точки в мнимой части");
-
-            int tempPos;
-            if (tokens.Count <= 11) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-
-            if (SkipToToken(7)) // ')'
-            {
-                GetNextToken();
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "закрывающая скобка ')'");
-
-            if (SkipToToken(13))
-            {
-                return END();
-            }
-
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
-
-        //  16) <IMAG_FRACTION> -> digit <IMAG_FRACTION> | ')' <END>
-        private bool IMAG_FRACTION()
-        {
-            if (currentToken.id == 7)
-            {
-                GetNextToken();
-                return END();
-            }
-
-            AddError(currentToken, "закрывающая скобка ')'");
-            int tempPos;
-            if (tokens.Count <= 12) tempPos = currentPos - 1;
-            else tempPos = currentPos;
-            if (SkipToToken(7))
-            {
-                GetNextToken();
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            if (SkipToToken(13)) // ';'
-            {
-                return END();
-            }
-            currentPos = tempPos;
-            currentToken = tokens[tempPos];
-            AddError(currentToken, "оператор заверешения ';' в конце");
-
-            return false;
-        }
 
         //  17) <END> -> ';'
         private bool END()
@@ -1071,11 +585,16 @@ namespace Scanner
             AddError(currentToken, "оператор заверешения ';' в конце");
             return true;
         }
-        private void AddError(Token token, string expected)
+        private void AddError(Token token, string expected, bool desc = true)
         {
             string invalidFragment = token?.name ?? "Конец строки";
             string location = token?.location ?? "позиция неизвестна";
             string description = $"Ожидалось {expected}. Встречено '{invalidFragment}'";
+            if (desc == false)
+            {
+                errors.Add(new SyntError(invalidFragment, location, expected));
+                return;
+            }
             errors.Add(new SyntError(invalidFragment, location, description));
         }
         private bool SkipToToken(int id)
@@ -1083,44 +602,6 @@ namespace Scanner
             while (currentPos < tokens.Count)
             {
                 if (currentToken.id == id)
-                {
-                    return true;
-                }
-                GetNextToken();
-            }
-            return false;
-        }
-        private bool SkipToNumberOrSign()
-        {
-            while (currentPos < tokens.Count)
-            {
-                if (currentToken.id == 8 || currentToken.id == 9 ||
-                    currentToken.id == 10 || currentToken.id == 11)
-                {
-                    return true;
-                }
-                GetNextToken();
-            }
-            return false;
-        }
-        private bool SkipToNumberOrSignOrCommo()
-        {
-            while (currentPos < tokens.Count)
-            {
-                if (currentToken.id == 8 || currentToken.id == 9 ||
-                    currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 12)
-                {
-                    return true;
-                }
-                GetNextToken();
-            }
-            return false;
-        }
-        private bool SkipToNumber()
-        {
-            while (currentPos < tokens.Count)
-            {
-                if (currentToken.id == 10 || currentToken.id == 11)
                 {
                     return true;
                 }
@@ -1136,80 +617,391 @@ namespace Scanner
                 currentToken = tokens[currentPos];
             }
         }
-
-        public List<Token> MergeErrorTokensSimple(List<Token> tokens)
+        
+        private void E()
         {
-            List<Token> result = new List<Token>();
-
-            for (int i = 0; i < tokens.Count; i++)
+            if (currentToken.id == 14)
             {
-                Token currentToken = tokens[i];
+                GetNextToken();
+                return;
+            }
+            T();
+            A();
+        }
 
-                if (currentToken.id == 1 || currentToken.id == 3 || currentToken.id == -1)
+        // T -> FB
+
+        private void T()
+        {
+            F();
+            B();
+        }
+
+        // A -> epsilon | + TA | - TA
+
+        private void A()
+        {
+            // Выход по пустой цепочке
+            if (currentToken == null) return;
+
+            // Знаки операции
+            else if (currentToken.id == 8 || currentToken.id == 9)
+            {
+                GetNextToken();
+                T();
+                A();
+            }
+        }
+
+        // B -> epsilon | * FB | / FB | % FB
+
+        private void B()
+        {
+            // Выход по пустой цепочке
+            if (currentToken == null) return;
+
+            // Знаки операции
+            else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 17)
+            {
+                GetNextToken();
+                F();
+                B();
+            }
+
+            // встретили аргумент
+            else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6)
+            {
+                AddError(currentToken, "знак оператора");
+                GetNextToken();
+                if (currentToken == null) return;
+                else if (currentToken.id == 8 || currentToken.id == 9) A();
+                else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 17) B();
+                else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6) T();
+
+            }
+
+            // встретили закрывающую скобку, но нет открывающей
+            else if (currentToken.id == 7 && countParenthesis <= 0)
+            {
+                string bufferName = "";
+                string bufferLocation = currentToken.location;
+                // проходим по циклу до допустимых символов
+                while (currentToken != null)
                 {
-                    string mergedName = currentToken.name;
-                    string location = currentToken.location;
-                    int lastIndex = i;
-                    bool hasErrors = (currentToken.id == -1);
-
-                    while (lastIndex + 1 < tokens.Count)
+                    bufferName += currentToken.name;
+                    // выход
+                    if (currentToken.id != 7)
                     {
-                        Token nextToken = tokens[lastIndex + 1];
-
-                        // Если следующий токен - пробел, прерываем объединение
-                        if (nextToken.id == 5)
+                        bufferName = bufferName.Replace(currentToken.name, "");
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
                         {
-                            break;
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
                         }
-
-                        // Если следующий токен - оператор или разделитель
-                        if (nextToken.id == 6 || nextToken.id == 7 || nextToken.id == 11 ||
-                            nextToken.id == 12 || nextToken.id == 4 || nextToken.id == 8 ||
-                            nextToken.id == 13)
-                        {
-                            break;
-                        }
-
-                        // Объединяем части идентификатора
-                        if (nextToken.id == 1 || nextToken.id == 3 || nextToken.id == -1)
-                        {
-                            mergedName += nextToken.name;
-                            lastIndex++;
-                            if (nextToken.id == -1) hasErrors = true;
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лишняя скобка", false);
+                        B();
+                        break;
                     }
-
-                    // Создаём итоговый токен
-                    if (lastIndex > i || hasErrors)
+                    GetNextToken();
+                    // закончились лексемы
+                    if (currentToken == null)
                     {
-                        int finalId = hasErrors || mergedName.Any(c => !char.IsLetterOrDigit(c) && c != '_') ? -1 :
-                                     mergedName == "Complex" ? 1 :
-                                     mergedName == "new" ? 2 : 3;
-
-                        string finalType = finalId == -1 ? "Недопустимый идентификатор" :
-                                          finalId == 1 ? "Ключевое слово Complex" :
-                                          finalId == 2 ? "Ключевое слово new" :
-                                          "Идентификатор";
-
-                        result.Add(new Token(finalId, finalType, mergedName, location));
-                        i = lastIndex;
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лишняя скобка", false);
+                        return;
                     }
-                    else
-                    {
-                        result.Add(currentToken);
-                    }
-                }
-                else if (currentToken.id != 5) // Пропускаем токены пробелов
-                {
-                    result.Add(currentToken);
                 }
             }
 
-            return result;
+            // недопустимый символ
+            else if (currentToken.id == -1)
+            {
+                string bufferName = "";
+                string bufferLocation = currentToken.location;
+
+                // проходим по циклу до допустимых символов
+                while (currentToken != null)
+                {
+                    bufferName += currentToken.name;
+                    // выход
+                    if (currentToken.id != -1)
+                    {
+                        bufferName = bufferName.Replace(currentToken.name, "");
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лексическая ошибка", false);
+                        break;
+                    }
+                    GetNextToken();
+                    // закончились лексемы
+                    if (currentToken == null)
+                    {
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лексическая ошибка", false);
+                        return;
+                    }
+                }
+                if (currentToken.id == 8 || currentToken.id == 9) A();
+                else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 17) B();
+                else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6)
+                {
+                    AddError(currentToken, "знак оператора");
+                    T();
+                }
+            }
+
+        }
+
+        // F -> num | id | ( E )
+        private int countParenthesis = 1; // кол-во пар скобок
+
+        private void F()
+        {
+            // встретили закрывающую скобку или конец строки
+            if (currentToken == null || currentToken.id == 7)
+            {
+                AddError(currentToken, "число, индентификатор или открывающая скобка (");
+                if (currentToken == null) return;
+                string bufferName = "";
+                string bufferLocation = currentToken.location;
+                // проходим по циклу до допустимых символов
+                while (currentToken != null)
+                {
+                    bufferName += currentToken.name;
+                    // выход
+                    if (countParenthesis > 0) break;
+                    if (currentToken.id != 7 && countParenthesis <= 0)
+                    {
+                        bufferName = bufferName.Replace(currentToken.name, "");
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лишняя скобка", false);
+                        B();
+                        break;
+                    }
+                    GetNextToken();
+                    // закончились лексемы
+                    if (currentToken == null)
+                    {
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, "Лишняя скобка", false);
+                        return;
+                    }
+                }
+                if (currentToken == null) return;
+                else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 7) T();
+                else if (currentToken.id == 8 || currentToken.id == 9) A();
+                else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 17) B();
+                else if (currentToken.id == 8) return;
+            }
+
+            // встретили идентификатор или число
+            else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11)
+            {
+                GetNextToken();
+                return;
+            }
+
+            // встретили открывающую скобку
+            else if (currentToken.id == 6)
+            {
+                countParenthesis++;
+                GetNextToken();
+                E();
+
+                if (currentToken == null)
+                {
+                    AddError(currentToken, "закрывающая скобка )");
+                    return;
+                }
+                else if (currentToken.id == 7)
+                {
+                    countParenthesis--;
+                    GetNextToken();
+                    if (currentToken == null || currentToken.id != 7) return;
+                    if (countParenthesis > 0) return;
+                    string bufferName = "";
+                    string bufferLocation = currentToken.location;
+
+                    while (currentToken != null)
+                    {
+                        bufferName += currentToken.name;
+                        if (currentToken.id != 7)
+                        {
+                            bufferName = bufferName.Replace(currentToken.name, "");
+                            Token lastToken = tokens[currentPos - 1];
+                            if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                            {
+                                bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                            }
+                            else { bufferLocation += " \n" + lastToken.location; }
+                            Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                            AddError(errorToken, "Лишняя скобка", false);
+                            B();
+                            return;
+                        }
+                        GetNextToken();
+                        if (currentToken == null)
+                        {
+                            Token lastToken = tokens[currentPos - 1];
+                            if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                            {
+                                bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                            }
+                            else { bufferLocation += " \n" + lastToken.location; }
+                            Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                            AddError(errorToken, "Лишняя скобка", false);
+                            return;
+                        }
+                    }
+                }
+                if (currentToken.id == -1)
+                {
+                    while (currentToken.id == -1)
+                    {
+                        AddError(currentToken, "Лексическая ошибка", false);
+                        GetNextToken();
+                        if (currentToken == null) break;
+                    }
+
+                }
+                if (currentToken == null) { }
+                else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6) T();
+                else if (currentToken.id == 8 || currentToken.id == 9) A();
+                else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 17) B();
+                else if (currentToken.id == 8) return;
+
+                AddError(currentToken, "закрывающая скобка )");
+                GetNextToken();
+                return;
+            }
+
+            // встретили недопустимый символ
+            else if (currentToken.id == -1)
+            {
+                string bufferName1 = currentToken.name;
+                string bufferLocation1 = currentToken.location;
+
+                while (currentToken != null)
+                {
+                    GetNextToken();
+                    if (currentToken == null)
+                    {
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation1.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation1 = bufferLocation1.Replace('-' + bufferLocation1.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation1 += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName1, bufferLocation1);
+                        AddError(errorToken, "Лексическая ошибка", false);
+
+                        AddError(currentToken, "число, индентификатор или открывающая скобка (");
+                        return;
+                    }
+                    bufferName1 += currentToken.name;
+                    if (currentToken.id != -1)
+                    {
+                        bufferName1 = bufferName1.Replace(currentToken.name, "");
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation1.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation1 = bufferLocation1.Replace('-' + bufferLocation1.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation1 += " \n" + lastToken.location; }
+                        Token errorToken = new Token(-1, "", bufferName1, bufferLocation1);
+                        AddError(errorToken, "Лексическая ошибка", false);
+                        break;
+                    }
+                }
+                if (currentToken.id == 8 || currentToken.id == 9)
+                {
+                    AddError(currentToken, "число, индентификатор или открывающая скобка (");
+                    A();
+                }
+                else if (currentToken.id == 15 || currentToken.id == 16 || currentToken.id == 1)
+                {
+                    AddError(currentToken, "число, индентификатор или открывающая скобка (");
+                    B();
+                }
+                else if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6)
+                {
+                    T();
+                }
+                return;
+            }
+
+            // Проходимся до идентификатора итд
+            else
+            {
+                string bufferName = "";
+                string bufferLocation = currentToken.location;
+
+                while (currentToken != null)
+                {
+                    if (currentToken.id == -1)
+                    {
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, " число, индентификатор или открывающая скобка (");
+
+
+                        return;
+                    }
+                    bufferName += currentToken.name;
+                    if (currentToken.id == 3 || currentToken.id == 10 || currentToken.id == 11 || currentToken.id == 6 || currentToken.id == 7)
+                    {
+                        bufferName = bufferName.Replace(currentToken.name, "");
+                        Token lastToken = tokens[currentPos - 1];
+                        if (bufferLocation.Split()[1] == lastToken.location.Split()[1])
+                        {
+                            bufferLocation = bufferLocation.Replace('-' + bufferLocation.Split()[2].Split('-')[1], '-' + lastToken.location.Split()[2].Split('-')[1]);
+                        }
+                        else { bufferLocation += " \n" + lastToken.location; }
+
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, " число, индентификатор или открывающая скобка (");
+                        F();
+                        return;
+                    }
+                    GetNextToken();
+                    if (currentToken == null)
+                    {
+                        Token errorToken = new Token(-1, "", bufferName, bufferLocation);
+                        AddError(errorToken, " число, индентификатор или открывающая скобка (");
+                        return;
+                    }
+                }
+            }
         }
     }
 }

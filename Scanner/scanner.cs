@@ -98,31 +98,31 @@ namespace Scanner
                         case ' ':
                             buffer += liter;
                             getNext();
-                            addToken(5, "Разделитель", buffer);
+                            //addToken(5, "Разделитель", buffer);
                             buffer = "";
                             break;
                         case '(':
                             buffer += liter;
                             getNext();
-                            addToken(6, "Оператор конструктора", buffer);
+                            addToken(6, "Открывающая скобка", buffer);
                             buffer = "";
                             break;
                         case ')':
                             buffer += liter;
                             getNext();
-                            addToken(7, "Оператор конструктора", buffer);
+                            addToken(7, "Закрывающая скобка", buffer);
                             buffer = "";
                             break;
                         case '-':
                             buffer += liter;
                             getNext();
-                            addToken(8, "Знак минуса", buffer);
+                            addToken(8, "Знак вычитания", buffer);
                             buffer = "";
                             break;
                         case '+':
                             buffer += liter;
                             getNext();
-                            addToken(9, "Знак плюса", buffer);
+                            addToken(9, "Знак сложения", buffer);
                             buffer = "";
                             break;
                         case ',':
@@ -146,6 +146,24 @@ namespace Scanner
                             buffer += liter;
                             getNext();
                             addToken(14, "Строка", buffer);
+                            buffer = "";
+                            break;
+                        case '*':
+                            buffer += liter;
+                            getNext();
+                            addToken(15, "Знак умножения", buffer);
+                            buffer = "";
+                            break;
+                        case '/':
+                            buffer += liter;
+                            getNext();
+                            addToken(16, "Знак деления", buffer);
+                            buffer = "";
+                            break;
+                        case '%':
+                            buffer += liter;
+                            getNext();
+                            addToken(17, "Знак остаток от деления", buffer);
                             buffer = "";
                             break;
                         default:

@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AST.cs" />
+    <Compile Include="POLIZ.cs" />
     <Compile Include="scanner.cs" />
     <Compile Include="FormGUI.cs">
       <SubType>Form</SubType>

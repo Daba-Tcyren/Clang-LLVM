@@ -216,50 +216,74 @@ namespace Scanner
         {
             try
             {
+                // Очистка всех таблиц и richTextBox
                 outputBox.Rows.Clear();
                 outputBoxParser.Rows.Clear();
                 outputBoxSemError.Rows.Clear();
                 richTextBoxAST.Clear();
 
+                // Лексический анализ
                 scanner scannerWork = new scanner();
                 List<Token> tokens = scannerWork.analyze(inputBox.Text);
 
+                // Синтаксический анализ
                 Parser syntParser = new Parser();
                 List<SyntError> errorParser = syntParser.Parse(tokens);
 
+                // Семантический анализ с оптимизациями
                 SemAnalyzer semAnalyzer = new SemAnalyzer();
-                
 
                 ReportFile tempReport = new ReportFile();
-                
+
+                // Вывод лексических токенов
                 foreach (Token token in tokens)
                 {
                     outputBox.Rows.Add(token.id, token.type, token.name, token.location);
                     tempReport.addReport(token.id.ToString(), token.type, token.name, token.location);
                 }
 
+                // Вывод синтаксических ошибок
                 foreach (SyntError error in errorParser)
                 {
                     outputBoxParser.Rows.Add(error.invalidFragment, error.location, error.description);
                 }
-                if (errorParser.Count == 1 && errorParser[0].invalidFragment == "Успешно" && errorParser[0].location == "" && errorParser[0].description == "Синтаксический анализ завершен без ошибок") 
+
+                // Если синтаксических ошибок нет
+                if (errorParser.Count == 1 && errorParser[0].invalidFragment == "Успешно" &&
+                    errorParser[0].location == "" && errorParser[0].description == "Синтаксический анализ завершен без ошибок")
                 {
+                    // Семантический анализ
                     List<List<string>> trees = semAnalyzer.Analyze(tokens);
-                    foreach(List<string> tree in trees){
-                        foreach (string line in tree){
-                            richTextBoxAST.Text += line + Environment.NewLine;
+
+                    // Вывод AST в richTextBoxAST
+                    richTextBoxAST.Text = semAnalyzer.AstOutput;
+
+                    // Дополнительный вывод для наглядности
+                    richTextBoxAST.SelectionStart = richTextBoxAST.Text.Length;
+                    richTextBoxAST.SelectionColor = Color.Blue;
+                    richTextBoxAST.AppendText("\n=== ИТОГОВЫЙ РЕЗУЛЬТАТ ===\n");
+                    richTextBoxAST.SelectionColor = Color.Black;
+
+                    foreach (List<string> tree in trees)
+                    {
+                        foreach (string line in tree)
+                        {
+                            richTextBoxAST.AppendText(line + Environment.NewLine);
                         }
                     }
 
-                    foreach(SemError error in semAnalyzer.errors)
+                    // Вывод семантических ошибок
+                    foreach (SemError error in semAnalyzer.errors)
                     {
                         outputBoxSemError.Rows.Add(error.description, error.location);
                     }
-                    
                 }
-                else outputBoxParser.Rows.Add("Количество ошибок:", errorParser.Count, "");
-                
-                
+                else
+                {
+                    outputBoxParser.Rows.Add("Количество ошибок:", errorParser.Count, "");
+                }
+
+                // Обновление отчёта
                 int indexFile = files.SelectedIndex;
                 report.RemoveAt(indexFile);
                 report.Insert(indexFile, tempReport);
