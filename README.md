@@ -1,10 +1,158 @@
-<img width="1761" height="1157" alt="cfg_mainO2" src="https://github.com/user-attachments/assets/a48388d2-dee6-40cc-ae46-dccb6bac5920" />
+# Лабораторная работа 7. Анализ и преобразование кода с использованием Clang и LLVM
+
+# Цель работы: 
+Познакомиться с инструментарием Clang и LLVM, освоить получение абстрактного синтаксического дерева (AST) и промежуточного представления (LLVM IR) для кода на C/C++, научиться применять базовые оптимизации, строить графы потока управления (CFG), а также анализировать влияние оптимизаций на различные синтаксические конструкции языка.
+
+Сведения об авторе 
+
+Студент: Тарбаев Даба-Цырен 
+
+Группа: АП-327
+
+
+# Постановка задачи
+Необходимо выполнить следующие шаги:
+1. Установка среды
+   
+   Установить Clang, LLVM, opt и Graphviz (например, в Ubuntu 26.04).
+
+2. Работа с AST
+
+   Сгенерировать абстрактное синтаксическое дерево для заданного C/C++‑файла.
+
+3. Генерация LLVM IR
+
+   Получить промежуточное представление кода без оптимизаций (-O0) и с оптимизациями (-O2).
+
+3. Оптимизация IR
+
+   Применить оптимизации с помощью opt и/или флагов Clang, сравнить изменения.
+
+5. Построение CFG
+
+   Построить граф потока управления для одной или нескольких функций.
+
+6. Индивидуальное задание (по варианту)
+
+   Выполнить анализ конкретной синтаксической конструкции в соответствии с вариантом. Сформулировать, как LLVM обрабатывает выбранную конструкцию, какие оптимизации применяются.
+
+7. Выводы
+   Ответить на контрольные вопросы
+
+
+# Установка среды 
+
+Работа выполнялась в среде Ubuntu 22.04. Установлены следующие инструменты:
+- clang — компилятор языка C/C++;
+- llvm — инструменты анализа и оптимизации кода;
+- opt — инструмент для работы с LLVM IR и применения оптимизаций;
+- Graphviz — инструмент для визуализации кода.
+Команда установки: sudo apt install clang llvm
+
+<img width="815" height="758" alt="изображение" src="https://github.com/user-attachments/assets/95634fbd-1266-4548-8b82-29031cfe3484" />
+
+Команда для установки библиотеки Graphviz: sudo apt install graphviz
+<img width="974" height="631" alt="изображение" src="https://github.com/user-attachments/assets/bd0e56de-1c09-48ad-97a3-f06b8bdee41a" />
+
+# Общая часть работы
+
+Для общей части был создан файл main.c:
+
+    #include <stdio.h>
+    int square(int x) {
+        return x * x;
+    }
+    int main() {
+        int a = 5;
+        int b = square(a);
+        printf("%d\n", b);
+        return 0;
+    }
+Сохранена в файл main.c.
+
+<img width="453" height="423" alt="изображение" src="https://github.com/user-attachments/assets/4e34d72f-1584-44bd-b4f9-cd41f2780940" />
+
+# Получение AST
+
+Команда для получения AST:
+
+    clang -Xclang -ast-dump -fsyntax-only main.c
+AST наглядно показывает структуру программы: функцию square, её параметр x и операцию умножения BinaryOperator с двумя обращениями к переменной x.
+<img width="974" height="627" alt="изображение" src="https://github.com/user-attachments/assets/b2312524-12c0-4e89-a5f8-bf2a11edf163" />
+
+# Генерация LLVM IR без оптимизаций
+
+Команда:
+
+    clang -O0 -S -emit-llvm main.c -o main_O0.ll
+Фрагмент IR без оптимизаций для функции square:
+    
+    define dso_local i32 @square(i32 noundef %0) #0 {
+      %2 = alloca i32, align 4
+      store i32 %0, ptr %2, align 4
+      %3 = load i32, ptr %2, align 4
+      %4 = load i32, ptr %2, align 4
+      %5 = mul nsw i32 %3, %4
+      ret i32 %5
+    }
+Видны все alloca (выделение памяти на стеке), load/store (чтение/запись в память). Код неоптимизирован, много лишних операций.
+# Генерация LLVM IR с оптимизацией -O2
+
+Команда:
+
+    clang -O2 -S -emit-llvm main.c -o main_O2.ll
+Фрагмент оптимизированного IR:
+
+    define dso_local noundef i32 @main() local_unnamed_addr #1 {
+      %1 = tail call i32 (ptr, ...) @printf(ptr noundef nonnull dereferenceable(1) @.str, i32 noundef 25)
+      ret i32 0
+    }
+Анализ:
+    Функция square полностью встроена.
+    Её вызов square(5) вычислен на этапе компиляции - это 25.
+    Все переменные a, b, x удалены из памяти.
+    Программа свелась к одному вызову printf с константой 25.
+
+# Построение CFG общей программы
+Для построения CFG использовались команды:
+  
+    clang -O2 -S -emit-llvm main.c -o main_O2.ll
+    opt -passes=dot-cfg -disable-output main_O2.ll
+    dot -Tpng .main.dot -o cfg_main.png
+    xdg-open cfg_main.png
+CFG функции main после оптимизации:
+
 <img width="660" height="144" alt="cfg_main" src="https://github.com/user-attachments/assets/75af97b2-f25b-4d9f-a4bd-a2a632f6defc" />
-<img width="913" height="1024" alt="cfg_main" src="https://github.com/user-attachments/assets/1cc4074c-f510-4e25-9f80-2e2e41942e06" />
-# Clang-LLVM
 
-https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/edit?tab=t.0#heading=h.ngkoxkn940cy
+# Индивидуальное задание: Комплексные числа
 
+Исходный код
+
+Для индивидуального задания был создан файл main.cpp:
+
+    #include <iostream>
+    #include <complex>
+    
+    int main() {
+        std::complex<double> z1(3.0, 4.0);
+        std::complex<double> z2(1.0, 2.0);
+        auto z3 = z1 * z2 + z1;
+        std::cout << z3.real() << " " << z3.imag() << std::endl;
+        return 0;
+    }
+Скриншот исходного кода:
+<img width="621" height="375" alt="изображение" src="https://github.com/user-attachments/assets/e89d52d8-4a64-4901-bafc-871bc6b36b90" />
+Смысл программы: складываем два комплексных числа и выводим получившиеся.
+
+# Получение AST
+Команда:
+    
+    ang -Xclang -ast-dump -Xclang -ast-dump-filter=main -fsyntax-only main.cpp
+Скриншот AST:
+
+<img width="974" height="638" alt="изображение" src="https://github.com/user-attachments/assets/2ff4a5f0-7528-424e-ba70-982924197b14" />
+
+Фрагмент вывода AST:
 
     Dumping main:
     FunctionDecl 0x60d09e857090 <main.cpp:4:1, line:10:1> line:4:5 main 'int ()'
@@ -66,10 +214,17 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
       `-ReturnStmt 0x60d09e85f460 <line:9:3, col:10>
         `-IntegerLiteral 0x60d09e85f440 <col:10> 'int' 0
 
+# Генерация LLVM IR без оптимизаций
+Команда:
 
-01
+    clang -O0 -S -emit-llvm dowhile.c -o dowhile_O0.ll
+Скриншот IR без оптимизаций:
 
-        define dso_local noundef i32 @main() #0 {
+<img width="956" height="756" alt="изображение" src="https://github.com/user-attachments/assets/67b49d9f-1777-445a-824f-fdb243198976" />
+
+Фрагмент IR:
+
+    define dso_local noundef i32 @main() #0 {
       %1 = alloca i32, align 4
       %2 = alloca %"class.std::complex", align 8
       %3 = alloca %"class.std::complex", align 8
@@ -103,7 +258,16 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
       ret i32 0
     }
 
-01
+# Генерация LLVM IR с оптимизацией -O1, -O2, -O3
+
+Команда для оптимизации -О1:
+
+    clang -O1 -S -emit-llvm main.c -o main_O1.ll
+Скриншот IR после оптимизации:
+
+<img width="945" height="758" alt="изображение" src="https://github.com/user-attachments/assets/91f70878-0c24-418e-864d-7942a7b238c3" />
+
+Фрагмент оптимизированного IR -O1:
 
     define dso_local noundef i32 @main() local_unnamed_addr #0 {
       %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
@@ -148,7 +312,65 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
       ret i32 0
     }
 
-02
+Команда для оптимизации -О2:
+
+    clang -O2 -S -emit-llvm main.c -o main_O2.ll
+Скриншот IR после оптимизации:
+
+<img width="940" height="754" alt="изображение" src="https://github.com/user-attachments/assets/83c7eaa4-c914-4bf2-8f51-84456aead64b" />
+
+Фрагмент оптимизированного IR -O2:
+
+    define dso_local noundef i32 @main() local_unnamed_addr #0 {
+      %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
+      %2 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l(ptr noundef nonnull align 8 dereferenceable(8) %1, ptr noundef nonnull @.str, i64 noundef 1)
+      %3 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) %1, double noundef 1.400000e+01)
+      %4 = load ptr, ptr %3, align 8, !tbaa !5
+      %5 = getelementptr i8, ptr %4, i64 -24
+      %6 = load i64, ptr %5, align 8
+      %7 = getelementptr inbounds i8, ptr %3, i64 %6
+      %8 = getelementptr inbounds %"class.std::basic_ios", ptr %7, i64 0, i32 5
+      %9 = load ptr, ptr %8, align 8, !tbaa !8
+      %10 = icmp eq ptr %9, null
+      br i1 %10, label %11, label %12
+    
+    11:                                               ; preds = %0
+      tail call void @_ZSt16__throw_bad_castv() #3
+      unreachable
+    
+    12:                                               ; preds = %0
+      %13 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 8
+      %14 = load i8, ptr %13, align 8, !tbaa !20
+      %15 = icmp eq i8 %14, 0
+      br i1 %15, label %19, label %16
+    
+    16:                                               ; preds = %12
+      %17 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 9, i64 10
+      %18 = load i8, ptr %17, align 1, !tbaa !23
+      br label %24
+    
+    19:                                               ; preds = %12
+      tail call void @_ZNKSt5ctypeIcE13_M_widen_initEv(ptr noundef nonnull align 8 dereferenceable(570) %9)
+      %20 = load ptr, ptr %9, align 8, !tbaa !5
+      %21 = getelementptr inbounds ptr, ptr %20, i64 6
+      %22 = load ptr, ptr %21, align 8
+      %23 = tail call noundef signext i8 %22(ptr noundef nonnull align 8 dereferenceable(570) %9, i8 noundef signext 10)
+      br label %24
+    
+    24:                                               ; preds = %16, %19
+      %25 = phi i8 [ %18, %16 ], [ %23, %19 ]
+      %26 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo3putEc(ptr noundef nonnull align 8 dereferenceable(8) %3, i8 noundef signext %25)
+      %27 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo5flushEv(ptr noundef nonnull align 8 dereferenceable(8) %26)
+      ret i32 0
+    }
+Команда для оптимизации -О3:
+
+    clang -O3 -S -emit-llvm main.c -o main_O3.ll
+Скриншот IR после оптимизации:
+
+<img width="946" height="764" alt="изображение" src="https://github.com/user-attachments/assets/f96695ed-9120-413b-b770-e87bb0c8afbe" />
+
+Фрагмент оптимизированного IR -O3:
 
     define dso_local noundef i32 @main() local_unnamed_addr #0 {
       %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
@@ -193,51 +415,50 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
       ret i32 0
     }
 
-03
+Сравнение:
 
 
-    define dso_local noundef i32 @main() local_unnamed_addr #0 {
-      %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
-      %2 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l(ptr noundef nonnull align 8 dereferenceable(8) %1, ptr noundef nonnull @.str, i64 noundef 1)
-      %3 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) %1, double noundef 1.400000e+01)
-      %4 = load ptr, ptr %3, align 8, !tbaa !5
-      %5 = getelementptr i8, ptr %4, i64 -24
-      %6 = load i64, ptr %5, align 8
-      %7 = getelementptr inbounds i8, ptr %3, i64 %6
-      %8 = getelementptr inbounds %"class.std::basic_ios", ptr %7, i64 0, i32 5
-      %9 = load ptr, ptr %8, align 8, !tbaa !8
-      %10 = icmp eq ptr %9, null
-      br i1 %10, label %11, label %12
-    
-    11:                                               ; preds = %0
-      tail call void @_ZSt16__throw_bad_castv() #3
-      unreachable
-    
-    12:                                               ; preds = %0
-      %13 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 8
-      %14 = load i8, ptr %13, align 8, !tbaa !20
-      %15 = icmp eq i8 %14, 0
-      br i1 %15, label %19, label %16
-    
-    16:                                               ; preds = %12
-      %17 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 9, i64 10
-      %18 = load i8, ptr %17, align 1, !tbaa !23
-      br label %24
-    
-    19:                                               ; preds = %12
-      tail call void @_ZNKSt5ctypeIcE13_M_widen_initEv(ptr noundef nonnull align 8 dereferenceable(570) %9)
-      %20 = load ptr, ptr %9, align 8, !tbaa !5
-      %21 = getelementptr inbounds ptr, ptr %20, i64 6
-      %22 = load ptr, ptr %21, align 8
-      %23 = tail call noundef signext i8 %22(ptr noundef nonnull align 8 dereferenceable(570) %9, i8 noundef signext 10)
-      br label %24
-    
-    24:                                               ; preds = %16, %19
-      %25 = phi i8 [ %18, %16 ], [ %23, %19 ]
-      %26 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo3putEc(ptr noundef nonnull align 8 dereferenceable(8) %3, i8 noundef signext %25)
-      %27 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo5flushEv(ptr noundef nonnull align 8 dereferenceable(8) %26)
-      ret i32 0
-    }
+
+# Исследование встраивания операторов * и +
+
+команда:
+
+    grep -E "call.*_ZSt(ml|pl)" complex_O3.ll
+Скриншот:
+
+<img width="467" height="552" alt="Рисунок1_21" src="https://github.com/user-attachments/assets/19edd608-608f-42a6-a6b2-9ffb618518ff" />
+
+Вывод:
+
+# Построение CFG 
+
+До оптимизации (-O0):
+        
+    clang++ -O0 -S -emit-llvm main.cpp -o main_O0.ll
+    opt passes=dot-cfg -disable-output main_O0.ll
+    dot -Tpng .main.dot -o cfg_main_O0.png
+
+
+
+После оптимизации (-O2):
+
+    clang++ -O2 -S -emit-llvm main.cpp -o main_O2.ll
+    opt passes=dot-cfg -disable-output main_O2.ll
+    dot -Tpng .main.dot -o cfg_main_O2.png
+
+<img width="1761" height="1157" alt="cfg_mainO2" src="https://github.com/user-attachments/assets/a48388d2-dee6-40cc-ae46-dccb6bac5920" />
+
+<img width="913" height="1024" alt="cfg_main" src="https://github.com/user-attachments/assets/1cc4074c-f510-4e25-9f80-2e2e41942e06" />
+# Clang-LLVM
+
+https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/edit?tab=t.0#heading=h.ngkoxkn940cy
+
+
+
+
+
+
+
 
 * +
 
