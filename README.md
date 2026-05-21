@@ -611,10 +611,32 @@ CFG функции main после оптимизации:
 
  # Дополнительное задание
 
- <img width="341" height="683" alt="Тфяк-Страница — 6 drawio" src="https://github.com/user-attachments/assets/d20681c5-7173-41e8-9b08-db941a61bde8" />
- 
- <img width="331" height="1001" alt="Тфяк-Страница — 7 drawio" src="https://github.com/user-attachments/assets/c78e292a-9a48-44f0-b21d-4f5766b842d9" />
+Выражение из 5 лабараторной работы: Complex c1 = new Complex(1.2, 6.0); 
+AST конструкции
 
+<img width="644" height="245" alt="изображение" src="https://github.com/user-attachments/assets/b3f00180-e1f3-4d47-8d58-e165fbc392c8" />
+
+Упрощенное IR / TAC конструкции
+
+<img width="366" height="214" alt="изображение" src="https://github.com/user-attachments/assets/071bfcdb-eed0-48ba-a885-fed526b2cec1" />
+
+
+# Локальная оптимизация 1: свёртка констант
+
+Первая реализованная оптимизация — свёртка констант.
+
+Смысл оптимизации: если операция выполняется над двумя известными числовыми константами, результат можно вычислить сразу и заменить операцию обычным присваиванием.
+Пример: Если встречено `Complex c1 = new Complex(1.2 + 55 / 8 * 5, 6.0);` , то IR известны числовые значение из-за чего можем сразу вычислить и записать переменную как `Complex c1 = new Complex(35.575, 6);`
+
+<img width="979" height="847" alt="изображение" src="https://github.com/user-attachments/assets/14d6a439-c0f7-4e59-aee3-0c6b3d520b23" />
+
+# Локальная оптимизация 2: Упрощение комплексного числа
+
+Смысл оптимизации: если Мнимая часть равна нулю, то есть можно заменить на вещественное.
+
+Пример: Если встречено `Complex c1 = new Complex(1.2, 423.32*0);` , то IR должен вычислит благодаря первой локальной оптимизации, что мнимое число нулевое и можем переменную записать как `double c1 = 1.2`
+
+<img width="980" height="852" alt="изображение" src="https://github.com/user-attachments/assets/d8aa4ce2-6c63-45f9-b5f6-615bbdc0db70" />
 
 
 # Выводы
