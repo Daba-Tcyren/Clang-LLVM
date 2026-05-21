@@ -124,6 +124,8 @@ CFG функции main после оптимизации:
 
 <img width="660" height="144" alt="cfg_main" src="https://github.com/user-attachments/assets/75af97b2-f25b-4d9f-a4bd-a2a632f6defc" />
 
+Файл cfg_main.png содержит один базовый блок (т.к. после оптимизаций в main нет ветвлений).
+
 # Индивидуальное задание: Комплексные числа
 
 Исходный код
@@ -416,7 +418,31 @@ CFG функции main после оптимизации:
     }
 
 Сравнение:
+Уровень -O1
+    Выполняется inlining (встраивание) функций _ZStmlIdE... и _ZStplIdE....
+    В IR исчезают call, вместо них появляются арифметические инструкции над double.
+    Появляются инструкции fmul (умножение чисел с плавающей точкой) и fadd (сложение).
 
+Уровень -O2
+    Код становится ещё чище: компилятор переиспользует регистры, удаляет лишние временные переменные.
+    Инструкции fmul/fadd сгруппированы для вычисления (3+4i)*(1+2i) + (3+4i).
+
+Уровень -O3
+    Добавляется агрессивное встраивание (если что-то осталось).
+    Векторизация (SSE/AVX) для операций над double.
+    В нашем примере, результат полностью вычислен на этапе компиляции: (-5 + 10i) + (3+4i) = (-2 + 14i).
+    В IR остаётся только std::cout << (-2) << " " << (14) << std::endl.
+
+Сравнение -O0 vs -O3:
+-O0
+Множество call функций
+Множество alloca, load, store
+Неэффективно
+
+-O3
+Нет вызовов, только fmul, fadd
+Регистровые переменные (SSA)
+Высокая производительность, расчёт констант
 
 
 # Исследование встраивания операторов * и +
@@ -428,41 +454,9 @@ CFG функции main после оптимизации:
 
 <img width="467" height="552" alt="Рисунок1_21" src="https://github.com/user-attachments/assets/19edd608-608f-42a6-a6b2-9ffb618518ff" />
 
-Вывод:
+фрагмент:
 
-# Построение CFG 
-
-До оптимизации (-O0):
-        
-    clang++ -O0 -S -emit-llvm main.cpp -o main_O0.ll
-    opt passes=dot-cfg -disable-output main_O0.ll
-    dot -Tpng .main.dot -o cfg_main_O0.png
-
-
-
-После оптимизации (-O2):
-
-    clang++ -O2 -S -emit-llvm main.cpp -o main_O2.ll
-    opt passes=dot-cfg -disable-output main_O2.ll
-    dot -Tpng .main.dot -o cfg_main_O2.png
-
-<img width="1761" height="1157" alt="cfg_mainO2" src="https://github.com/user-attachments/assets/a48388d2-dee6-40cc-ae46-dccb6bac5920" />
-
-<img width="913" height="1024" alt="cfg_main" src="https://github.com/user-attachments/assets/1cc4074c-f510-4e25-9f80-2e2e41942e06" />
-# Clang-LLVM
-
-https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/edit?tab=t.0#heading=h.ngkoxkn940cy
-
-
-
-
-
-
-
-
-* +
-
-        ; ModuleID = 'main.cpp'
+       ; ModuleID = 'main.cpp'
         source_filename = "main.cpp"
         target datalayout = "e-m:e-p270:32:32-p271:32:32-p272:64:64-i64:64-i128:128-f80:128-n8:16:32:64-S128"
         target triple = "x86_64-pc-linux-gnu"
@@ -570,3 +564,49 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
         !22 = !{!"_ZTSNSt6locale5facetE", !17, i64 8}
         !23 = !{!12, !12, i64 0}
 
+
+Вывод:
+
+Без оптимизаций (-O0): Операторы не встраиваются, вызываются как обычные функции.
+
+С оптимизациями (-O1 и выше): Компилятор встраивает эти операторы, так как они короткие и определены в заголовочном файле (inline).
+
+Причина: Это стандартная практика для шаблонных и inline функций в C++. LLVM на стадии -O1 применяет проход -inline.
+
+# Построение CFG 
+
+До оптимизации (-O0):
+        
+    clang++ -O0 -S -emit-llvm main.cpp -o main_O0.ll
+    opt passes=dot-cfg -disable-output main_O0.ll
+    dot -Tpng .main.dot -o cfg_main_O0.png
+
+граф потока управления:
+
+<img width="913" height="1024" alt="cfg_main" src="https://github.com/user-attachments/assets/1cc4074c-f510-4e25-9f80-2e2e41942e06" />
+
+После оптимизации (-O2):
+
+    clang++ -O2 -S -emit-llvm main.cpp -o main_O2.ll
+    opt passes=dot-cfg -disable-output main_O2.ll
+    dot -Tpng .main.dot -o cfg_main_O2.png
+
+граф потока управления:
+
+<img width="1761" height="1157" alt="cfg_mainO2" src="https://github.com/user-attachments/assets/a48388d2-dee6-40cc-ae46-dccb6bac5920" />
+
+Сравнение CFG:
+    До оптимизации (-O0): CFG функции main содержит много узлов (для каждого вызова оператора, для создания временных объектов). Есть блоки, отвечающие за вызов деструкторов временных объектов.
+
+   После оптимизации (-O2): CFG функции main содержит 1-3 базовых блока (прямолинейный код). Узлы для вызовов операторов и деструкторов исчезли.
+
+# Выводы по индивидуальному заданию
+   LLVM обрабатывает пользовательские операторы (например, * для std::complex) как обычные функции.
+   На уровне без оптимизаций (-O0) каждый оператор — это call, что удобно для отладки.
+   На уровнях -O1, -O2, -O3:
+   Происходит inlining этих функций.
+   Операторы над комплексными числами раскладываются в элементарные операции над double (fmul, fadd, ...).
+   После inlining становятся возможны свертка констант, удаление мёртвого кода и другие оптимизации.
+   В итоге комплексная арифметика в оптимизированном коде так же эффективна, как и ручное написание операций над двумя double.
+
+ # Дополнительное задание
