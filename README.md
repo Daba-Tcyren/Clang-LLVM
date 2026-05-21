@@ -64,3 +64,174 @@ https://docs.google.com/document/d/1k0JvGzGMbVJl3UGqt_UtvJmBLf4d8gD8JF5YT0Kh2sY/
         `-IntegerLiteral 0x60d09e85f440 <col:10> 'int' 0
 
 
+01
+
+        define dso_local noundef i32 @main() #0 {
+      %1 = alloca i32, align 4
+      %2 = alloca %"class.std::complex", align 8
+      %3 = alloca %"class.std::complex", align 8
+      %4 = alloca %"class.std::complex", align 8
+      %5 = alloca %"class.std::complex", align 8
+      store i32 0, ptr %1, align 4
+      call void @_ZNSt7complexIdEC2Edd(ptr noundef nonnull align 8 dereferenceable(16) %2, double noundef 3.000000e+00, double noundef 4.000000e+00)
+      call void @_ZNSt7complexIdEC2Edd(ptr noundef nonnull align 8 dereferenceable(16) %3, double noundef 1.000000e+00, double noundef 2.000000e+00)
+      %6 = call { double, double } @_ZStmlIdESt7complexIT_ERKS2_S4_(ptr noundef nonnull align 8 dereferenceable(16) %2, ptr noundef nonnull align 8 dereferenceable(16) %3)
+      %7 = getelementptr inbounds %"class.std::complex", ptr %5, i32 0, i32 0
+      %8 = getelementptr inbounds { double, double }, ptr %7, i32 0, i32 0
+      %9 = extractvalue { double, double } %6, 0
+      store double %9, ptr %8, align 8
+      %10 = getelementptr inbounds { double, double }, ptr %7, i32 0, i32 1
+      %11 = extractvalue { double, double } %6, 1
+      store double %11, ptr %10, align 8
+      %12 = call { double, double } @_ZStplIdESt7complexIT_ERKS2_S4_(ptr noundef nonnull align 8 dereferenceable(16) %5, ptr noundef nonnull align 8 dereferenceable(16) %2)
+      %13 = getelementptr inbounds %"class.std::complex", ptr %4, i32 0, i32 0
+      %14 = getelementptr inbounds { double, double }, ptr %13, i32 0, i32 0
+      %15 = extractvalue { double, double } %12, 0
+      store double %15, ptr %14, align 8
+      %16 = getelementptr inbounds { double, double }, ptr %13, i32 0, i32 1
+      %17 = extractvalue { double, double } %12, 1
+      store double %17, ptr %16, align 8
+      %18 = call noundef double @_ZNKSt7complexIdE4realB5cxx11Ev(ptr noundef nonnull align 8 dereferenceable(16) %4)
+      %19 = call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSolsEd(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef %18)
+      %20 = call noundef nonnull align 8 dereferenceable(8) ptr @_ZStlsISt11char_traitsIcEERSt13basic_ostreamIcT_ES5_PKc(ptr noundef nonnull align 8 dereferenceable(8) %19, ptr noundef @.str)
+      %21 = call noundef double @_ZNKSt7complexIdE4imagB5cxx11Ev(ptr noundef nonnull align 8 dereferenceable(16) %4)
+      %22 = call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSolsEd(ptr noundef nonnull align 8 dereferenceable(8) %20, double noundef %21)
+      %23 = call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSolsEPFRSoS_E(ptr noundef nonnull align 8 dereferenceable(8) %22, ptr noundef @_ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_)
+      ret i32 0
+    }
+
+01
+
+    define dso_local noundef i32 @main() local_unnamed_addr #0 {
+      %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
+      %2 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l(ptr noundef nonnull align 8 dereferenceable(8) %1, ptr noundef nonnull @.str, i64 noundef 1)
+      %3 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) %1, double noundef 1.400000e+01)
+      %4 = load ptr, ptr %3, align 8, !tbaa !5
+      %5 = getelementptr i8, ptr %4, i64 -24
+      %6 = load i64, ptr %5, align 8
+      %7 = getelementptr inbounds i8, ptr %3, i64 %6
+      %8 = getelementptr inbounds %"class.std::basic_ios", ptr %7, i64 0, i32 5
+      %9 = load ptr, ptr %8, align 8, !tbaa !8
+      %10 = icmp eq ptr %9, null
+      br i1 %10, label %11, label %12
+    
+    11:                                               ; preds = %0
+      tail call void @_ZSt16__throw_bad_castv() #3
+      unreachable
+    
+    12:                                               ; preds = %0
+      %13 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 8
+      %14 = load i8, ptr %13, align 8, !tbaa !20
+      %15 = icmp eq i8 %14, 0
+      br i1 %15, label %19, label %16
+    
+    16:                                               ; preds = %12
+      %17 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 9, i64 10
+      %18 = load i8, ptr %17, align 1, !tbaa !23
+      br label %24
+    
+    19:                                               ; preds = %12
+      tail call void @_ZNKSt5ctypeIcE13_M_widen_initEv(ptr noundef nonnull align 8 dereferenceable(570) %9)
+      %20 = load ptr, ptr %9, align 8, !tbaa !5
+      %21 = getelementptr inbounds ptr, ptr %20, i64 6
+      %22 = load ptr, ptr %21, align 8
+      %23 = tail call noundef signext i8 %22(ptr noundef nonnull align 8 dereferenceable(570) %9, i8 noundef signext 10)
+      br label %24
+    
+    24:                                               ; preds = %16, %19
+      %25 = phi i8 [ %18, %16 ], [ %23, %19 ]
+      %26 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo3putEc(ptr noundef nonnull align 8 dereferenceable(8) %3, i8 noundef signext %25)
+      %27 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo5flushEv(ptr noundef nonnull align 8 dereferenceable(8) %26)
+      ret i32 0
+    }
+
+02
+
+    define dso_local noundef i32 @main() local_unnamed_addr #0 {
+      %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
+      %2 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l(ptr noundef nonnull align 8 dereferenceable(8) %1, ptr noundef nonnull @.str, i64 noundef 1)
+      %3 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) %1, double noundef 1.400000e+01)
+      %4 = load ptr, ptr %3, align 8, !tbaa !5
+      %5 = getelementptr i8, ptr %4, i64 -24
+      %6 = load i64, ptr %5, align 8
+      %7 = getelementptr inbounds i8, ptr %3, i64 %6
+      %8 = getelementptr inbounds %"class.std::basic_ios", ptr %7, i64 0, i32 5
+      %9 = load ptr, ptr %8, align 8, !tbaa !8
+      %10 = icmp eq ptr %9, null
+      br i1 %10, label %11, label %12
+    
+    11:                                               ; preds = %0
+      tail call void @_ZSt16__throw_bad_castv() #3
+      unreachable
+    
+    12:                                               ; preds = %0
+      %13 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 8
+      %14 = load i8, ptr %13, align 8, !tbaa !20
+      %15 = icmp eq i8 %14, 0
+      br i1 %15, label %19, label %16
+    
+    16:                                               ; preds = %12
+      %17 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 9, i64 10
+      %18 = load i8, ptr %17, align 1, !tbaa !23
+      br label %24
+    
+    19:                                               ; preds = %12
+      tail call void @_ZNKSt5ctypeIcE13_M_widen_initEv(ptr noundef nonnull align 8 dereferenceable(570) %9)
+      %20 = load ptr, ptr %9, align 8, !tbaa !5
+      %21 = getelementptr inbounds ptr, ptr %20, i64 6
+      %22 = load ptr, ptr %21, align 8
+      %23 = tail call noundef signext i8 %22(ptr noundef nonnull align 8 dereferenceable(570) %9, i8 noundef signext 10)
+      br label %24
+    
+    24:                                               ; preds = %16, %19
+      %25 = phi i8 [ %18, %16 ], [ %23, %19 ]
+      %26 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo3putEc(ptr noundef nonnull align 8 dereferenceable(8) %3, i8 noundef signext %25)
+      %27 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo5flushEv(ptr noundef nonnull align 8 dereferenceable(8) %26)
+      ret i32 0
+    }
+
+03
+
+
+    define dso_local noundef i32 @main() local_unnamed_addr #0 {
+      %1 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) @_ZSt4cout, double noundef -2.000000e+00)
+      %2 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZSt16__ostream_insertIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_PKS3_l(ptr noundef nonnull align 8 dereferenceable(8) %1, ptr noundef nonnull @.str, i64 noundef 1)
+      %3 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo9_M_insertIdEERSoT_(ptr noundef nonnull align 8 dereferenceable(8) %1, double noundef 1.400000e+01)
+      %4 = load ptr, ptr %3, align 8, !tbaa !5
+      %5 = getelementptr i8, ptr %4, i64 -24
+      %6 = load i64, ptr %5, align 8
+      %7 = getelementptr inbounds i8, ptr %3, i64 %6
+      %8 = getelementptr inbounds %"class.std::basic_ios", ptr %7, i64 0, i32 5
+      %9 = load ptr, ptr %8, align 8, !tbaa !8
+      %10 = icmp eq ptr %9, null
+      br i1 %10, label %11, label %12
+    
+    11:                                               ; preds = %0
+      tail call void @_ZSt16__throw_bad_castv() #3
+      unreachable
+    
+    12:                                               ; preds = %0
+      %13 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 8
+      %14 = load i8, ptr %13, align 8, !tbaa !20
+      %15 = icmp eq i8 %14, 0
+      br i1 %15, label %19, label %16
+    
+    16:                                               ; preds = %12
+      %17 = getelementptr inbounds %"class.std::ctype", ptr %9, i64 0, i32 9, i64 10
+      %18 = load i8, ptr %17, align 1, !tbaa !23
+      br label %24
+    
+    19:                                               ; preds = %12
+      tail call void @_ZNKSt5ctypeIcE13_M_widen_initEv(ptr noundef nonnull align 8 dereferenceable(570) %9)
+      %20 = load ptr, ptr %9, align 8, !tbaa !5
+      %21 = getelementptr inbounds ptr, ptr %20, i64 6
+      %22 = load ptr, ptr %21, align 8
+      %23 = tail call noundef signext i8 %22(ptr noundef nonnull align 8 dereferenceable(570) %9, i8 noundef signext 10)
+      br label %24
+    
+    24:                                               ; preds = %16, %19
+      %25 = phi i8 [ %18, %16 ], [ %23, %19 ]
+      %26 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo3putEc(ptr noundef nonnull align 8 dereferenceable(8) %3, i8 noundef signext %25)
+      %27 = tail call noundef nonnull align 8 dereferenceable(8) ptr @_ZNSo5flushEv(ptr noundef nonnull align 8 dereferenceable(8) %26)
+      ret i32 0
+    }
